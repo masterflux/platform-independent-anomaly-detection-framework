@@ -1,12 +1,19 @@
 use std::cmp::min;
 use std::time::Instant;
-
+use std::fs::File;
+use std::io::{BufRead, BufReader};
+use std::error::Error;
 
 fn wasserstein_distance(mut a: Vec<f64>, mut b: Vec<f64>) -> f64 {
     a.sort_by(|x, y| x.partial_cmp(y).unwrap());
     b.sort_by(|x, y| x.partial_cmp(y).unwrap());
     let len = min(a.len(), b.len());
-    a.iter().take(len).zip(b.iter().take(len)).map(|(x, y)| (x - y).abs()).sum::<f64>() / len as f64
+    a.iter()
+     .take(len)
+     .zip(b.iter().take(len))
+     .map(|(x, y)| (x - y).abs())
+     .sum::<f64>()
+     / len as f64
 }
 
 fn detect_watch(data: &[f64], threshold_ratio: f64, batch_size: usize) -> Vec<usize> {
@@ -35,35 +42,28 @@ fn detect_watch(data: &[f64], threshold_ratio: f64, batch_size: usize) -> Vec<us
     change_points
 }
 
-fn rand_normal(mean: f64, stddev: f64) -> f64 {
-    use rand_distr::{Distribution, Normal};
-    let normal = Normal::new(mean, stddev).unwrap();
-    normal.sample(&mut rand::thread_rng())
+fn load_csv(path: &str) -> Result<Vec<f64>, Box<dyn Error>> {
+    let file = File::open(path)?;
+    println!("File opened successfully!");
+
+    let reader = BufReader::new(file);
+    let mut data = Vec::new();
+    for line in reader.lines() {
+        let val: f64 = line?.trim().parse()?;
+        data.push(val);
+    }
+    Ok(data)
 }
 
 fn main() {
     let start = Instant::now();
-    let mut data = Vec::new();
-   // Segment 1: mean 0
-for _ in 0..30 {
-    data.push(rand_normal(0.0, 1.0));
-}
-// Segment 2: mean 5
-for _ in 0..30 {
-    data.push(rand_normal(5.0, 1.0));
-}
-// Segment 3: mean -3
-for _ in 0..30 {
-    data.push(rand_normal(-3.0, 1.0));
-}
-// Segment 4: mean 2
-for _ in 0..30 {
-    data.push(rand_normal(2.0, 1.0));
-}
+
+    println!("Attempting to open input.csv...");
+    let data = load_csv("input.csv").expect("Unable to open CSV file");
+
     let duration = start.elapsed();
     println!("Execution time: {:?}", duration);
 
     let result = detect_watch(&data, 3.0, 5);
     println!("Change points: {:?}", result);
-
 }
