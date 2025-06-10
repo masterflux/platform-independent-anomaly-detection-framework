@@ -1,0 +1,18 @@
+Writing generated file: D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\settings.rs
+Writing generated file: D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\types.rs
+Writing generated file: D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\opcodes.rs
+Writing generated file: D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\clif_opt.isle
+Writing generated file: D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\clif_lower.isle
+Writing generated file: D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\inst_builder.rs
+Writing generated file: D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\settings-x86.rs
+Rebuilding D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\isle_opt.rs
+Writing ISLE-generated Rust code to D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\isle_opt.rs
+Rebuilding D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\isle_x64.rs
+Writing ISLE-generated Rust code to D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\isle_x64.rs
+Rebuilding D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\isle_aarch64.rs
+Writing ISLE-generated Rust code to D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\isle_aarch64.rs
+Rebuilding D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\isle_s390x.rs
+Writing ISLE-generated Rust code to D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\isle_s390x.rs
+Rebuilding D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\isle_riscv64.rs
+Writing ISLE-generated Rust code to D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\build\cranelift-codegen-bdfeabb19d29a7c7\out\isle_riscv64.rs
+fatal: not a git repository (or any of the parent directories): .git

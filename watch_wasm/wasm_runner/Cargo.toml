@@ -1,0 +1,11 @@
+[package]
+name = "wasm_runner"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+wasmtime = "12.0"       # or whatever the latest wasmtime crate is
+wasmtime-wasi = "12.0"
+sysinfo  = "0.29"       # remove the non-existent "tokio" feature
+anyhow   = "1.0"
+cap-std = "2.0"

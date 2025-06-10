@@ -1,69 +1,50 @@
-use std::cmp::min;
-use std::time::Instant;
-use std::fs::File;
-use std::io::{BufRead, BufReader};
-use std::error::Error;
+use watch_wasm::change_point_detector::ChangePointDetector;
 
-fn wasserstein_distance(mut a: Vec<f64>, mut b: Vec<f64>) -> f64 {
-    a.sort_by(|x, y| x.partial_cmp(y).unwrap());
-    b.sort_by(|x, y| x.partial_cmp(y).unwrap());
-    let len = min(a.len(), b.len());
-    a.iter()
-     .take(len)
-     .zip(b.iter().take(len))
-     .map(|(x, y)| (x - y).abs())
-     .sum::<f64>()
-     / len as f64
-}
+use watch_wasm::{
+    utils::load_csv,
+    detectors::{BOCPD, CUSUM, MicroWatch, PELT, BOCPDMS},
+};
 
-fn detect_watch(data: &[f64], threshold_ratio: f64, batch_size: usize) -> Vec<usize> {
-    let mut change_points = Vec::new();
-    let mut reference: Vec<f64> = data[..batch_size * 3].to_vec();
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let data = load_csv("input.csv")?;
+    println!("Loaded {} points", data.len());
+    println!(" ");
 
-    let mut threshold: f64 = 0.0;
-    for i in 0..3 {
-        let batch = &reference[i * batch_size..(i + 1) * batch_size];
-        threshold = threshold.max(wasserstein_distance(batch.to_vec(), reference.clone()));
+    println!("\n=== Testing All Change Point Detection Algorithms ===\n");
+    println!(" ");
+
+    // 1. BOCPD
+    println!("1. BOCPD (Bayesian Online Change Point Detection):");
+    let mut bocpd = BOCPD::new(0.1, 0.01, 1.0, 0.0);
+    println!("BOCPD: {:?}", bocpd.detect(&data));
+    println!(" ");
+
+    // 2. CUSUM
+    println!("\n2. CUSUM (Cumulative Sum):");
+    let mut cusum = CUSUM::new(30, 0.01);
+    println!("CUSUM: {:?}", cusum.detect(&data));
+    println!(" ");
+
+    // 3. Micro-Watch
+    println!("\n3. Micro-Watch:");
+    for (i, name) in ["Euclidean", "Manhattan", "Chebyshev", "KL-Divergence", 
+                      "Jensen-Shannon", "Bhattacharyya", "Hellinger"].iter().enumerate() {
+        let mut mw = MicroWatch::new(i, 0.5, 5);
+        println!("MW {}: {:?}", name, mw.detect(&data));
     }
-    threshold *= threshold_ratio;
+    println!(" ");
 
-    let mut ref_data = reference.clone();
-    let mut i = batch_size * 3;
-    while i + batch_size <= data.len() {
-        let batch = &data[i..i + batch_size];
-        let dist = wasserstein_distance(batch.to_vec(), ref_data.clone());
-        if dist > threshold {
-            change_points.push(i);
-            ref_data.clear();
-        }
-        ref_data.extend_from_slice(batch);
-        i += batch_size;
-    }
-    change_points
-}
+    // 4. PELT
+    println!("\n4. PELT (Pruned Exact Linear Time):");
+    let mut pelt = PELT::new(10.0, 2, 1);
+    println!("PELT: {:?}", pelt.detect(&data));
+    println!(" ");
 
-fn load_csv(path: &str) -> Result<Vec<f64>, Box<dyn Error>> {
-    let file = File::open(path)?;
-    println!("File opened successfully!");
+    // 5. BOCPDMS
+    println!("\n5. BOCPDMS (Bayesian Online CP Detection - Multivariate):");
+    let mut bocpdms = BOCPDMS::new(0.01, 0.01, 10.0);
+    println!("BOCPDMS: {:?}", bocpdms.detect(&data));
+    println!(" ");
 
-    let reader = BufReader::new(file);
-    let mut data = Vec::new();
-    for line in reader.lines() {
-        let val: f64 = line?.trim().parse()?;
-        data.push(val);
-    }
-    Ok(data)
-}
-
-fn main() {
-    let start = Instant::now();
-
-    println!("Attempting to open input.csv...");
-    let data = load_csv("input.csv").expect("Unable to open CSV file");
-
-    let duration = start.elapsed();
-    println!("Execution time: {:?}", duration);
-
-    let result = detect_watch(&data, 3.0, 5);
-    println!("Change points: {:?}", result);
+    Ok(())
 }

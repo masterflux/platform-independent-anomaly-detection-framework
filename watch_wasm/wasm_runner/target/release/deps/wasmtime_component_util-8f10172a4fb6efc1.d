@@ -1,0 +1,7 @@
+D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\deps\libwasmtime_component_util-8f10172a4fb6efc1.rmeta: C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmtime-component-util-12.0.2\src\lib.rs
+
+D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\deps\libwasmtime_component_util-8f10172a4fb6efc1.rlib: C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmtime-component-util-12.0.2\src\lib.rs
+
+D:\University\Dissertation\Code\watch\hostbased\watch_wasm\wasm_runner\target\release\deps\wasmtime_component_util-8f10172a4fb6efc1.d: C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmtime-component-util-12.0.2\src\lib.rs
+
+C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\wasmtime-component-util-12.0.2\src\lib.rs:
