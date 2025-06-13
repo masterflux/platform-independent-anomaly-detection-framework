@@ -43,14 +43,31 @@ pub fn erf(x: f64) -> f64 {
  }
 
 pub fn load_csv(path: &str) -> Result<Vec<f64>, Box<dyn Error>> {
-   let file = File::open(path)?;
-    let reader = BufReader::new(file);
+    let f = File::open(path)?;
     let mut data = Vec::new();
-    
-    for line in reader.lines() {
-        let val: f64 = line?.trim().parse()?;
-        data.push(val);
+    for line in BufReader::new(f).lines() {
+        let s = line?;
+        // skip blank/headers
+        if let Ok(x) = s.trim().parse::<f64>() {
+            data.push(x);
+        }
     }
-    
     Ok(data)
+}
+
+/// Load an _N_-column CSV as Vec of rows Vec<f64>
+pub fn load_csv_multi(path: &str) -> Result<Vec<Vec<f64>>, Box<dyn Error>> {
+    let f = File::open(path)?;
+    let mut out = Vec::new();
+    for line in BufReader::new(f).lines() {
+        let s = line?;
+        let row: Vec<f64> = s
+            .split(',')
+            .filter_map(|cell| cell.trim().parse().ok())
+            .collect();
+        if !row.is_empty() {
+            out.push(row);
+        }
+    }
+    Ok(out)
 }

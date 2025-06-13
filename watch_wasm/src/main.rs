@@ -1,50 +1,55 @@
+use std::{error::Error, fs, path::Path};
 use watch_wasm::change_point_detector::ChangePointDetector;
+use watch_wasm::utils::load_csv_multi;
+use watch_wasm::detectors::{BOCPD, CUSUM, MicroWatch, PELT, BOCPDMS};
 
-use watch_wasm::{
-    utils::load_csv,
-    detectors::{BOCPD, CUSUM, MicroWatch, PELT, BOCPDMS},
-};
+fn main() -> Result<(), Box<dyn Error>> {
+    let data_dir = Path::new("datasets/csv");
+    for entry in fs::read_dir(data_dir)? {
+        let entry = entry?;
+        let path = entry.path();
+        if path.extension().and_then(|s| s.to_str()) != Some("csv") {
+            continue;
+        }
+        let name = path.file_stem().unwrap().to_string_lossy();
+        let data = load_csv_multi(path.to_str().unwrap())?;
+        let rows = data.len();
+        let cols = data.get(0).map(|r| r.len()).unwrap_or(0);
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let data = load_csv("input.csv")?;
-    println!("Loaded {} points", data.len());
-    println!(" ");
+        println!("\n=== Dataset: {} ({} rows × {} cols) ===", name, rows, cols);
 
-    println!("\n=== Testing All Change Point Detection Algorithms ===\n");
-    println!(" ");
+        if cols > 1 {
+            // Multivariate: only BOCPDMS.multivariate
+            let mut bocpdms = BOCPDMS::new(0.01, 0.01, 3.0);
+            let cps = bocpdms.detect_multivariate(&data);
+            println!("BOCPDMS (multivariate) → {:?}", cps);
+        } else if cols == 1 {
+            // Univariate: extract column and run all detectors
+            let univ: Vec<f64> = data.iter().map(|r| r[0]).collect();
 
-    // 1. BOCPD
-    println!("1. BOCPD (Bayesian Online Change Point Detection):");
-    let mut bocpd = BOCPD::new(0.1, 0.01, 1.0, 0.0);
-    println!("BOCPD: {:?}", bocpd.detect(&data));
-    println!(" ");
+            // 1) BOCPD
+            let mut bocpd = BOCPD::new(0.1, 0.01, 1.0, 0.0);
+            println!("BOCPD   → {:?}", bocpd.detect(&univ));
 
-    // 2. CUSUM
-    println!("\n2. CUSUM (Cumulative Sum):");
-    let mut cusum = CUSUM::new(30, 0.01);
-    println!("CUSUM: {:?}", cusum.detect(&data));
-    println!(" ");
+            // 2) CUSUM
+            let mut cusum = CUSUM::new(30, 0.01);
+            println!("CUSUM   → {:?}", cusum.detect(&univ));
 
-    // 3. Micro-Watch
-    println!("\n3. Micro-Watch:");
-    for (i, name) in ["Euclidean", "Manhattan", "Chebyshev", "KL-Divergence", 
-                      "Jensen-Shannon", "Bhattacharyya", "Hellinger"].iter().enumerate() {
-        let mut mw = MicroWatch::new(i, 0.5, 5);
-        println!("MW {}: {:?}", name, mw.detect(&data));
+            // 3) MicroWatch (Euclidean)
+            let mut mw = MicroWatch::new(0, 0.5, 5);
+            println!("Micro-E → {:?}", mw.detect(&univ));
+
+            // 4) PELT
+            let mut pelt = PELT::new(10.0, 2, 1);
+            println!("PELT    → {:?}", pelt.detect(&univ));
+
+            // 5) BOCPDMS (univariate)
+            let mut bocpdms = BOCPDMS::new(0.01, 0.01, 3.0);
+            println!("BOCPDMS → {:?}", bocpdms.detect(&univ));
+        } else {
+            println!("  (no columns found, skipping)");
+        }
     }
-    println!(" ");
-
-    // 4. PELT
-    println!("\n4. PELT (Pruned Exact Linear Time):");
-    let mut pelt = PELT::new(10.0, 2, 1);
-    println!("PELT: {:?}", pelt.detect(&data));
-    println!(" ");
-
-    // 5. BOCPDMS
-    println!("\n5. BOCPDMS (Bayesian Online CP Detection - Multivariate):");
-    let mut bocpdms = BOCPDMS::new(0.01, 0.01, 10.0);
-    println!("BOCPDMS: {:?}", bocpdms.detect(&data));
-    println!(" ");
 
     Ok(())
 }
