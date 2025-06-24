@@ -36,7 +36,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             println!("CUSUM   → {:?}", cusum.detect(&univ));
 
             // 3) MicroWatch (Euclidean)
-            let mut mw = MicroWatch::new(0, 0.5, 5);
+            let mut mw = MicroWatch::new(0, 0.5, 3);
             println!("Micro-E → {:?}", mw.detect(&univ));
 
             // 4) PELT
