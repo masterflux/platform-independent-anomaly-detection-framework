@@ -19,23 +19,23 @@ fn main() -> Result<(), Box<dyn Error>> {
         println!("\n=== Dataset: {} ({} rows × {} cols) ===", name, rows, cols);
 
         if cols > 1 {
-            // Multivariate: only BOCPDMS.multivariate
+            // Multivariate
             let mut bocpdms = BOCPDMS::new(0.01, 0.01, 3.0);
             let cps = bocpdms.detect_multivariate(&data);
             println!("BOCPDMS (multivariate) → {:?}", cps);
         } else if cols == 1 {
-            // Univariate: extract column and run all detectors
+            // Univariate
             let univ: Vec<f64> = data.iter().map(|r| r[0]).collect();
 
             // 1) BOCPD
-            let mut bocpd = BOCPD::new(0.1, 0.01, 1.0, 0.0);
+            let mut bocpd = BOCPD::new(1.0,1.0, 1.0, 0.0);
             println!("BOCPD   → {:?}", bocpd.detect(&univ));
 
             // 2) CUSUM
-            let mut cusum = CUSUM::new(30, 0.01);
+            let mut cusum = CUSUM::new(5, 0.100);
             println!("CUSUM   → {:?}", cusum.detect(&univ));
 
-            // 3) MicroWatch (Euclidean)
+            // 3) MicroWatch 
             let mut mw = MicroWatch::new(0, 0.5, 3);
             println!("Micro-E → {:?}", mw.detect(&univ));
 

@@ -24,7 +24,7 @@ impl PELT {
     fn segment(&self, data: &[f64]) -> HashMap<(usize, usize), f64> {
         let n = data.len();
 
-        // Initialize with segment (0,0) cost=0
+        
         let mut partitions: HashMap<usize, HashMap<(usize, usize), f64>> = HashMap::new();
         let mut init_map = HashMap::new();
         init_map.insert((0, 0), 0.0);
@@ -32,7 +32,7 @@ impl PELT {
 
         let mut admissible = Vec::new();
 
-        // Candidate breakpoints
+        
         let mut indices = Vec::new();
         let mut k = self.min_size;
         while k < n {
@@ -45,7 +45,7 @@ impl PELT {
             let new_pt = ((bkp.saturating_sub(self.min_size)) / self.jump) * self.jump;
             admissible.push(new_pt);
 
-            // Build subproblems
+            
             let mut subs = Vec::new();
             for &t in &admissible {
                 if let Some(part) = partitions.get(&t) {
@@ -55,7 +55,7 @@ impl PELT {
                 }
             }
 
-            // Pick best via total_cmp (no panic)
+            
             if let Some(best) = subs
                 .into_iter()
                 .min_by(|a, b| {
@@ -75,7 +75,7 @@ impl PELT {
             }
         }
 
-        // Return the map for final index n, dropping (0,0)
+       
         if let Some(best) = partitions.get(&n) {
             let mut result = best.clone();
             result.remove(&(0, 0));

@@ -47,7 +47,7 @@ pub fn load_csv(path: &str) -> Result<Vec<f64>, Box<dyn Error>> {
     let mut data = Vec::new();
     for line in BufReader::new(f).lines() {
         let s = line?;
-        // skip blank/headers
+    
         if let Ok(x) = s.trim().parse::<f64>() {
             data.push(x);
         }
@@ -55,7 +55,6 @@ pub fn load_csv(path: &str) -> Result<Vec<f64>, Box<dyn Error>> {
     Ok(data)
 }
 
-/// Load an _N_-column CSV as Vec of rows Vec<f64>
 pub fn load_csv_multi(path: &str) -> Result<Vec<Vec<f64>>, Box<dyn Error>> {
     let f = File::open(path)?;
     let mut out = Vec::new();

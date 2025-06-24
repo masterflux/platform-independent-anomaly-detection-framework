@@ -18,8 +18,8 @@ impl BOCPD {
             beta,
             kappa,
             mu,
-            lambda: 20.0,       // hazard = 1/20 = 0.05
-            cp_threshold: 0.01, // lower threshold so we actually pick some peaks
+            lambda: 20.0,       
+            cp_threshold: 0.01, 
         }
     }
 
@@ -58,7 +58,7 @@ impl BOCPD {
 impl ChangePointDetector for BOCPD {
     fn detect(&mut self, data: &[f64]) -> Vec<usize> {
         let n = data.len();
-        // r[r][t] = P(run‐length = r at time t)
+       
         let mut r = vec![vec![0.0; n + 1]; n + 1];
         r[0][0] = 1.0;
 
@@ -70,28 +70,27 @@ impl ChangePointDetector for BOCPD {
 
         for (t, &x) in data.iter().enumerate() {
             let mut new_params = Vec::with_capacity(t + 2);
-            // the “reset” branch
+            
             new_params.push((self.alpha, self.beta, self.kappa, self.mu));
 
             for (run_length, &(a, b, k, m)) in params.iter().enumerate() {
                 let pred = self.student_t_pdf(x, a, b, k, m);
                 let haz  = self.hazard_function(run_length);
 
-                // continuation
                 if run_length + 1 <= n && t + 1 <= n {
                     r[run_length + 1][t + 1] = r[run_length][t] * pred * (1.0 - haz);
                 }
-                // change‐point occurs
+                
                 if t + 1 <= n {
                     r[0][t + 1] += r[run_length][t] * pred * haz;
                 }
 
-                // update run‐length parameters
+                
                 let upd = self.update_parameters(x, a, b, k, m);
                 new_params.push(upd);
             }
 
-            // normalize the column t+1
+            
             let sum: f64 = (0..=t+1).map(|i| r[i][t + 1]).sum();
             if sum > 0.0 {
                 for i in 0..=t+1 {
@@ -103,7 +102,6 @@ impl ChangePointDetector for BOCPD {
             cp_prob.push(r[0][t + 1]);
         }
 
-        // pick local peaks above threshold
         let mut cps = Vec::new();
         for t in 1..cp_prob.len() - 1 {
             let p = cp_prob[t];

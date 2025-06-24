@@ -12,7 +12,7 @@ impl BOCPDMS {
         Self { prior_a, prior_b, intensity }
     }
 
-    /// univariate helper (your existing code)
+   
     fn detect_variance_change(&self, data: &[f64], window_size: usize) -> Vec<usize> {
         let mut cps = Vec::new();
         if data.len() < 2 * window_size { return cps; }
@@ -29,7 +29,7 @@ impl BOCPDMS {
         cps
     }
 
-    /// NEW: collapse each row to its mean and run univariate detector
+    
     pub fn detect_multivariate(&mut self, data: &[Vec<f64>]) -> Vec<usize> {
         let univ: Vec<f64> = data
             .iter()

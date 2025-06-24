@@ -27,7 +27,7 @@ impl MicroWatch {
             dist_buffer: Vec::new(),
             sum: 0.0,
             dist_len: 0,
-            threshold: 0.0,
+            threshold: 0.50,
         }
     }
 
@@ -46,7 +46,7 @@ impl ChangePointDetector for MicroWatch {
             let batch = &data[i..i + self.batch_size];
             
             if self.is_creating_new_dist {
-                // Learning phase
+                
                 self.dist_buffer.extend_from_slice(batch);
                 self.dist_len += batch.len();
                 self.sum += batch.iter().sum::<f64>();
@@ -66,7 +66,7 @@ impl ChangePointDetector for MicroWatch {
                     self.threshold = max_dist * self.threshold_ratio;
                 }
             } else {
-                // Monitoring phase
+                
                 let dist_mean = self.sum / self.dist_len as f64;
                 let value = self.distance_to_mean(batch, dist_mean);
                 
@@ -79,13 +79,13 @@ impl ChangePointDetector for MicroWatch {
                     self.sum = 0.0;
                 }
                 
-                // Update running statistics
+                
                 if self.dist_len < self.max_dist_size {
                     self.dist_buffer.extend_from_slice(batch);
                     self.dist_len += batch.len();
                     self.sum += batch.iter().sum::<f64>();
                     
-                    // Recalculate threshold
+                    
                     let dist_mean = self.sum / self.dist_len as f64;
                     let mut max_dist: f64 = 0.0;
                     for chunk in self.dist_buffer.chunks(self.batch_size) {
