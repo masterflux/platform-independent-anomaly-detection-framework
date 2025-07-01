@@ -1,48 +1,44 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib.cm as cm
-import numpy as np
 
-def plot_mean_f1(df):
-    mean_f1 = df.groupby("algorithm")["f1"].mean().sort_values()
-    plt.figure(figsize=(8,4))
-    plt.bar(mean_f1.index, mean_f1.values)
-    plt.xticks(rotation=45, ha="right")
-    plt.xlabel("Algorithm")
-    plt.ylabel("Mean F1 score")
-    plt.title("Average F1 by Change‐Point Algorithm")
-    plt.tight_layout()
+# 1) Load your series (single‐column CSV of length ≥500)
+df = pd.read_csv("datasets/csv/brent_spot.csv")  
+values = df.iloc[:,0].values
 
-def plot_f1_box(df):
-    algs = df["algorithm"].unique()
-    data = [ df.loc[df["algorithm"]==alg, "f1"] for alg in algs ]
-    plt.figure(figsize=(8,5))
-    plt.boxplot(data, labels=algs, showmeans=True)
-    plt.xticks(rotation=45, ha="right")
-    plt.ylabel("F1 score")
-    plt.title("Distribution of F1 scores by Algorithm")
-    plt.tight_layout()
+# 2) Define first‐300 slice
+n = 300
+x = list(range(n))
+y = values[:n]
 
-def plot_f1_vs_cover(df):
-    algs = df["algorithm"].unique()
-    colors = cm.get_cmap("tab10", len(algs))
-    plt.figure(figsize=(6,6))
-    for i, alg in enumerate(algs):
-        sub = df[df["algorithm"]==alg]
-        plt.scatter(sub["cover"], sub["f1"],
-                    label=alg, alpha=0.7, s=40, color=colors(i))
-    plt.legend(bbox_to_anchor=(1.05,1), loc="upper left")
-    plt.xlabel("Covering")
-    plt.ylabel("F1 score")
-    plt.title("F1 vs Covering by Algorithm")
-    plt.tight_layout()
+# 3) Your CP lists
+new_cp = [48, 96, 136, 194, 230, 277, 381, 466]
+old_cp = [220, 221, 222]
+# (add the rest of your indices here…)
 
-def main():
-    df = pd.read_csv("accuracy.csv")
-    plot_mean_f1(df)
-    plot_f1_box(df)
-    plot_f1_vs_cover(df)
-    plt.show()
+# Keep only those < n
+new_cp = [i for i in new_cp if i < n]
+old_cp = [i for i in old_cp if i < n]
 
-if __name__ == "__main__":
-    main()
+# 4) Plot side by side
+fig, axes = plt.subplots(1, 2, figsize=(14, 5), sharey=True)
+
+for ax, cps, title in zip(axes, [new_cp, old_cp], ["New Results", "Old Results"]):
+    # plot time-series
+    ax.plot(x, y, label="Price")
+    # overlay CPs
+    ax.scatter(
+        cps,
+        [y[i] for i in cps],
+        color="red",
+        s=60,
+        zorder=5,
+        label=f"{len(cps)} CPs"
+    )
+    ax.set_title(title)
+    ax.set_xlabel("Sample index")
+    ax.legend(loc="upper left")
+
+axes[0].set_ylabel("Value")
+plt.suptitle(f"Zoom on first {n} samples — change-points as red dots", y=1.02)
+plt.tight_layout()
+plt.show()
