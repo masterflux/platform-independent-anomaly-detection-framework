@@ -82,13 +82,13 @@ impl DistanceMeasures {
 
     pub fn get_distance_function(index: usize) -> fn(&[f64], &[f64]) -> f64 {
         match index {
-            0 => Self::euclidean,
-            1 => Self::manhattan,
-            2 => Self::chebyshev,
-            3 => Self::kl_divergence,
-            4 => Self::jensen_shannon_divergence,
-            5 => Self::bhattacharyya,
-            6 => Self::hellinger,
+            0 => Self::bhattacharyya, //2
+            1 => Self::chebyshev, // 5
+            2 => Self::euclidean, // 10
+            3 => Self::hellinger, // 13
+            4 => Self::jensen_shannon_divergence, // 16
+            5 => Self::kl_divergence, // 18
+            6 => Self::manhattan, // 21
             _ => Self::euclidean, // default
         }
     }

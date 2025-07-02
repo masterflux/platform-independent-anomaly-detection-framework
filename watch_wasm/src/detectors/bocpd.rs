@@ -13,7 +13,11 @@ pub struct BOCPD {
 }
 
 impl BOCPD {
+<<<<<<< HEAD
+   
+=======
     /// Create a new BOCPD detector matching Python defaults
+>>>>>>> d719506060314435b622b74a3c80976d99a80752
     pub fn new(alpha: f64, beta: f64, kappa: f64, mu: f64) -> Self {
         Self { alpha, beta, kappa, mu }
     }
@@ -57,6 +61,19 @@ impl BOCPD {
 impl ChangePointDetector for BOCPD {
     fn detect(&mut self, data: &[f64]) -> Vec<usize> {
         let n = data.len();
+<<<<<<< HEAD
+        
+        let mut r = vec![vec![0.0; n + 1]; n + 1];
+        r[0][0] = 1.0;
+
+        
+        let mut params = vec![(self.alpha, self.beta, self.kappa, self.mu)];
+
+        
+        for (t, &x) in data.iter().enumerate() {
+            let mut new_params = Vec::with_capacity(params.len() + 1);
+            
+=======
         // R[r][t] = P(run-length = r at time t)
         let mut r = vec![vec![0.0; n + 1]; n + 1];
         r[0][0] = 1.0;
@@ -68,12 +85,27 @@ impl ChangePointDetector for BOCPD {
         for (t, &x) in data.iter().enumerate() {
             let mut new_params = Vec::with_capacity(params.len() + 1);
             // run-length 0 always uses the original hyperparameters
+>>>>>>> d719506060314435b622b74a3c80976d99a80752
             new_params.push((self.alpha, self.beta, self.kappa, self.mu));
 
             for (rl, &(a, b, k, m)) in params.iter().enumerate() {
                 let pred = self.student_t_pdf(x, a, b, k, m);
                 let haz  = self.hazard_function(rl);
 
+<<<<<<< HEAD
+                
+                if rl + 1 <= n {
+                    r[rl + 1][t + 1] = r[rl][t] * pred * (1.0 - haz);
+                }
+                
+                r[0][t + 1] += r[rl][t] * pred * haz;
+
+                
+                new_params.push(self.update_parameters(x, a, b, k, m));
+            }
+
+            
+=======
                 // growth
                 if rl + 1 <= n {
                     r[rl + 1][t + 1] = r[rl][t] * pred * (1.0 - haz);
@@ -86,6 +118,7 @@ impl ChangePointDetector for BOCPD {
             }
 
             // normalize column t+1
+>>>>>>> d719506060314435b622b74a3c80976d99a80752
             let col_sum: f64 = (0..=t + 1).map(|rl| r[rl][t + 1]).sum();
             if col_sum > 0.0 {
                 for rl in 0..=t + 1 {
@@ -96,6 +129,12 @@ impl ChangePointDetector for BOCPD {
             params = new_params;
         }
 
+<<<<<<< HEAD
+        let nw = 5;
+        let threshold = 0.1;
+        let mut cps = Vec::new();
+        
+=======
         // post-hoc detection exactly like Python’s:
         // cp_probs = R[Nw, Nw..n]
         // for i in 1..cp_probs.len(): if cp_probs[i]>threshold { push(i−Nw) }
@@ -103,6 +142,7 @@ impl ChangePointDetector for BOCPD {
         let threshold = 0.1;
         let mut cps = Vec::new();
         // cp_probs length = (n+1) - nw - 1 = n - nw
+>>>>>>> d719506060314435b622b74a3c80976d99a80752
         for i in 1..(n - nw + 1) {
             let col = nw + i;
             if r[nw][col] > threshold {
