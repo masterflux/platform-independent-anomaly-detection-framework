@@ -9,7 +9,7 @@ def parse_preds(s: str):
 
 def main():
     DATA_DIR = Path("datasets/csv")
-    df = pd.read_csv("results.csv", dtype=str).fillna("")
+    df = pd.read_csv("results/results.csv", dtype=str).fillna("")
 
     rows = []
     for _, row in df.iterrows():
@@ -39,7 +39,7 @@ def main():
             })
 
     out = pd.DataFrame(rows)
-    out.to_csv("size_accuracy.csv", index=False)
+    out.to_csv("results/size_accuracy.csv", index=False)
     print("→ size_accuracy.csv written")
 
 if __name__ == "__main__":
