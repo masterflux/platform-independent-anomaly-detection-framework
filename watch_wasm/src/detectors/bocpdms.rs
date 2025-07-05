@@ -2,7 +2,6 @@
 use crate::change_point_detector::ChangePointDetector;
 use std::collections::HashMap;
 
-
 pub struct BOCPDMS {
     prior_a:   f64,
     prior_b:   f64,

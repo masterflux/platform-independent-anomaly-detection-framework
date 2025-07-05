@@ -1,7 +1,6 @@
 use crate::change_point_detector::ChangePointDetector;
 use std::collections::HashMap;
 
-
 fn pdist(rows: &[Vec<f64>]) -> Vec<f64> {
     let n = rows.len();
     let mut out = Vec::with_capacity(n * (n - 1) / 2);
@@ -16,7 +15,6 @@ fn pdist(rows: &[Vec<f64>]) -> Vec<f64> {
     }
     out
 }
-
 
 fn squareform(cond: &[f64]) -> Vec<Vec<f64>> {
     let s = cond.len();
@@ -91,7 +89,6 @@ impl CostRbf {
         trace - total / (len as f64)
     }
 }
-
 
 pub struct PELT {
     pen:       f64,

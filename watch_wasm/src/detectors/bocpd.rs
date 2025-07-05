@@ -1,3 +1,5 @@
+// src/detectors/bocpd.rs
+
 use crate::utils::gamma;
 use crate::change_point_detector::ChangePointDetector;
 use std::collections::HashMap;

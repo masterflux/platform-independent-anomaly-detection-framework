@@ -599,281 +599,10 @@
 
 //--------------------current working one with ubuntu--------------------------
 
-// use std::{collections::HashMap, error::Error, fs, path::Path, process::Command};
-// use serde::Deserialize;
-// use serde_json;
-// use csv::{ReaderBuilder, Trim};
-
-// use watch_wasm::utils::load_csv_multi;
-// use watch_wasm::change_point_detector::ChangePointDetector;
-// use watch_wasm::detectors::{BOCPD, CUSUM, MicroWatch, PELT};
-
-// /// Load any CSV/TSV of `D: Deserialize` into a HashMap keyed by `key_fn(&D)`.
-// fn load_params<D>(
-//     path: &str,
-//     key_fn: impl Fn(&D) -> String,
-// ) -> Result<HashMap<String, D>, Box<dyn Error>>
-// where
-//     for<'de> D: Deserialize<'de>,
-// {
-//     let text = fs::read_to_string(path)?;
-//     let first = text.lines().next().unwrap_or("");
-//     let delim = if first.contains('\t') { b'\t' } else { b',' };
-//     let mut rdr = ReaderBuilder::new()
-//         .delimiter(delim)
-//         .trim(Trim::All)
-//         .from_reader(text.as_bytes());
-//     let mut map = HashMap::new();
-//     for rec in rdr.deserialize() {
-//         let rec: D = rec?;
-//         map.insert(key_fn(&rec), rec);
-//     }
-//     Ok(map)
-// }
-
-// /// For the seven MicroWatch rows per dataset
-// fn load_params_list<D>(
-//     path: &str,
-// ) -> Result<Vec<D>, Box<dyn Error>>
-// where
-//     for<'de> D: Deserialize<'de>,
-// {
-//     let text = fs::read_to_string(path)?;
-//     let first = text.lines().next().unwrap_or("");
-//     let delim = if first.contains('\t') { b'\t' } else { b',' };
-//     let mut rdr = ReaderBuilder::new()
-//         .delimiter(delim)
-//         .trim(Trim::All)
-//         .from_reader(text.as_bytes());
-//     let mut v = Vec::new();
-//     for rec in rdr.deserialize() {
-//         v.push(rec?);
-//     }
-//     Ok(v)
-// }
-
-// #[derive(Deserialize)]
-// struct BocpdParams {
-//     dataset: String,
-//     alpha:   f64,
-//     beta:    f64,
-//     kappa:   f64,
-//     mu:      f64,
-// }
-
-// #[derive(Deserialize)]
-// struct BocpdmsParams {
-//     dataset:   String,
-//     intensity: f64,
-//     prior_a:   f64,
-//     prior_b:   f64,
-// }
-
-// #[derive(Deserialize)]
-// struct CusumParams {
-//     file:     String,
-//     twarmup:  f64,
-//     plimit:   f64,
-// }
-
-// #[derive(Deserialize)]
-// struct PeltParams {
-//     dataset:  String,
-//     penalty:  f64,
-//     jump:     usize,
-//     min_size: usize,
-// }
-
-// /// MicroWatch tuning parameters (7 rows per dataset)
-// #[derive(Deserialize)]
-// struct WatchParams {
-//     #[serde(rename = "file_name")]
-//     dataset: String,
-
-//     distance_index:      usize,
-//     batch_size:          usize,
-//     #[serde(rename = "threshold")]
-//     threshold_ratio:     f64,
-//     max_dist_size:       usize,
-//     new_dist_buffer_size: usize,
-// }
-
-// /// Invoke the Python BOCPDMS script (in `scripts/`) and parse its JSON output.
-// fn detect_bocpdms_py(csv_path: &str, params_csv: &str) -> Vec<usize> {
-//     if cfg!(target_arch = "wasm32") {
-//         eprintln!("warning: skipping BOCPDMS under WASM");
-//         return Vec::new();
-//     }
-//     let output = Command::new("python3")
-//         .arg("scripts/detect_bocpdms.py")
-//         .arg(csv_path)
-//         .arg(params_csv)
-//         .output()
-//         .expect("failed to invoke detect_bocpdms.py");
-//     if !output.status.success() {
-//         panic!(
-//             "bocpdms script failed:\n{}",
-//             String::from_utf8_lossy(&output.stderr)
-//         );
-//     }
-//     serde_json::from_slice(&output.stdout)
-//         .expect("failed to parse JSON from bocpdms script")
-// }
-
-// fn main() -> Result<(), Box<dyn Error>> {
-//     // ─ load your existing best‐params tables ─────
-//     let bocpd_map  = load_params("params/params_bocpd_best.csv",    |p: &BocpdParams|   p.dataset.clone())?;
-//     let bms_map    = load_params("params/params_bocpdms_best.csv", |p: &BocpdmsParams| p.dataset.clone())?;
-//     let cusum_map  = load_params("params/params_cusum_best.csv",   |p: &CusumParams|   p.file.clone())?;
-//     let pelt_map   = load_params("params/params_pelt_best.csv",    |p: &PeltParams|    p.dataset.clone())?;
-
-//     // ─ load all 7 MicroWatch rows, then group by dataset ─────────
-//     let mut watch_map: HashMap<String, Vec<WatchParams>> = HashMap::new();
-//     for wp in load_params_list::<WatchParams>("params/params_watch_best.csv")? {
-//         watch_map.entry(wp.dataset.clone())
-//                  .or_default()
-//                  .push(wp);
-//     }
-
-//     // fallback BOCPD
-//     let default_bocpd = (0.001, 10.0, 0.1, 0.0);
-
-//     // ─ iterate every CSV under datasets/csv ───────────────────────
-//     let data_dir = Path::new("datasets/csv");
-//     for entry in fs::read_dir(data_dir)? {
-//         let path = entry?.path();
-//         if path.extension().and_then(|s| s.to_str()) != Some("csv") {
-//             continue;
-//         }
-//         let name = path.file_stem().unwrap().to_string_lossy();
-//         let data = load_csv_multi(path.to_str().unwrap())?;
-//         let rows = data.len();
-//         let cols = data.get(0).map(|r| r.len()).unwrap_or(0);
-
-//         println!("\n=== Dataset: {} ({} rows × {} cols) ===", name, rows, cols);
-
-//         // ─── MicroWatch: run all distance_index = 0..6 ────────────
-//         if let Some(params_list) = watch_map.get(&*name) {
-//             if cols > 1 {
-//                 // multivariate
-//                 for wp in params_list {
-//                     let mut mw = MicroWatch::new(wp.distance_index, 0.0, 1);
-//                     let mut pm = HashMap::new();
-//                     pm.insert("batch_size".to_string(),           wp.batch_size           as f64);
-//                     pm.insert("threshold_ratio".to_string(),      wp.threshold_ratio);
-//                     pm.insert("max_dist_size".to_string(),        wp.max_dist_size        as f64);
-//                     pm.insert("new_dist_buffer_size".to_string(), wp.new_dist_buffer_size as f64);
-//                     mw.set_params(pm);
-
-//                     let cps = mw.detect_multivariate(&data);
-//                     println!(
-//                         "MicroWatch idx={}  (batch_size={}, threshold_ratio={:.4}, max_dist_size={}, new_dist_buffer_size={}) → {:?}",
-//                         wp.distance_index,
-//                         wp.batch_size,
-//                         wp.threshold_ratio,
-//                         wp.max_dist_size,
-//                         wp.new_dist_buffer_size,
-//                         cps
-//                     );
-//                 }
-
-//                 let mut pelt = {
-//                     let (pen, j, ms) = pelt_map.get(&*name)
-//                         .map(|p| (p.penalty, p.jump, p.min_size))
-//                         .unwrap_or((100.0, 5, 1));
-//                     println!("  PELT params: penalty={}  jump={}  min_size={}", pen, j, ms);
-//                     PELT::new(pen, j, ms)
-//                 };
-//                 println!("PELT    (multi) → {:?}", pelt.detect_multivariate(&data));
-
-//                 // Python BOCPDMS
-//                 let cps = detect_bocpdms_py(path.to_str().unwrap(), "params/params_bocpdms_best.csv");
-//                 println!("BOCPDMS (multi) → {:?}", cps);
-
-//             } else {
-//                 // univariate
-//                 let univ: Vec<f64> = data.iter().map(|r| r[0]).collect();
-//                 for wp in params_list {
-//                     let mut mw = MicroWatch::new(wp.distance_index, 0.0, 1);
-//                     let mut pm = HashMap::new();
-//                     pm.insert("batch_size".to_string(),           wp.batch_size           as f64);
-//                     pm.insert("threshold_ratio".to_string(),      wp.threshold_ratio);
-//                     pm.insert("max_dist_size".to_string(),        wp.max_dist_size        as f64);
-//                     pm.insert("new_dist_buffer_size".to_string(), wp.new_dist_buffer_size as f64);
-//                     mw.set_params(pm);
-
-//                     let cps = mw.detect(&univ);
-//                     println!(
-//                         "MicroWatch idx={}  (batch_size={}, threshold_ratio={:.4}, max_dist_size={}, new_dist_buffer_size={}) → {:?}",
-//                         wp.distance_index,
-//                         wp.batch_size,
-//                         wp.threshold_ratio,
-//                         wp.max_dist_size,
-//                         wp.new_dist_buffer_size,
-//                         cps
-//                     );
-//                 }
-//             }
-//         } else {
-//             println!("  (no MicroWatch params for `{}`)", name);
-//         }
-
-//         // ─── then all your existing detectors ───────────────────────
-//         if cols == 1 {
-//             let univ: Vec<f64> = data.iter().map(|r| r[0]).collect();
-
-//             // BOCPD
-//             let mut bocpd = {
-//                 let (a,b,k,m) = bocpd_map.get(&*name)
-//                     .map(|p| (p.alpha, p.beta, p.kappa, p.mu))
-//                     .unwrap_or(default_bocpd);
-//                 BOCPD::new(a,b,k,m)
-//             };
-//             let mut cps_b = bocpd.detect(&univ);
-//             if bocpd_map.contains_key(&*name) && cps_b.is_empty() {
-//                 bocpd = BOCPD::new(default_bocpd.0,
-//                                    default_bocpd.1,
-//                                    default_bocpd.2,
-//                                    default_bocpd.3);
-//                 cps_b = bocpd.detect(&univ);
-//             }
-//             println!("BOCPD   → {:?}", cps_b);
-
-//             // CUSUM
-//             let (tw,pl) = cusum_map.get(&*name)
-//                              .map(|p| (p.twarmup as usize, p.plimit))
-//                              .unwrap_or((5,0.1));
-//             println!("CUSUM   → {:?}", CUSUM::new(tw,pl).detect(&univ));
-
-//             // PELT
-//             let pelt_cps = {
-//                 let (pen,j,ms) = pelt_map.get(&*name)
-//                     .map(|p| (p.penalty,p.jump,p.min_size))
-//                     .unwrap_or((100.0,5,1));
-//                 PELT::new(pen,j,ms).detect(&univ)
-//             };
-//             println!("PELT    → {:?}", pelt_cps);
-
-//             // Python BOCPDMS
-//             let bms_cps = detect_bocpdms_py(path.to_str().unwrap(),
-//                                             "params/params_bocpdms_best.csv");
-//             println!("BOCPDMS → {:?}", bms_cps);
-//         }
-//     }
-
-//     Ok(())
-// }
-
-
-
-
-//saving ubuntu-----------------------------
-
-
 use std::{collections::HashMap, error::Error, fs, path::Path, process::Command};
 use serde::Deserialize;
 use serde_json;
-use csv::{ReaderBuilder, Trim, WriterBuilder};
+use csv::{ReaderBuilder, Trim};
 
 use watch_wasm::utils::load_csv_multi;
 use watch_wasm::change_point_detector::ChangePointDetector;
@@ -902,7 +631,7 @@ where
     Ok(map)
 }
 
-/// Load any CSV/TSV into a Vec for MicroWatch (7 rows per dataset)
+/// For the seven MicroWatch rows per dataset
 fn load_params_list<D>(
     path: &str,
 ) -> Result<Vec<D>, Box<dyn Error>>
@@ -924,30 +653,52 @@ where
 }
 
 #[derive(Deserialize)]
-struct BocpdParams { dataset: String, alpha: f64, beta: f64, kappa: f64, mu: f64 }
+struct BocpdParams {
+    dataset: String,
+    alpha:   f64,
+    beta:    f64,
+    kappa:   f64,
+    mu:      f64,
+}
 
 #[derive(Deserialize)]
-struct BocpdmsParams { dataset: String, intensity: f64, prior_a: f64, prior_b: f64 }
+struct BocpdmsParams {
+    dataset:   String,
+    intensity: f64,
+    prior_a:   f64,
+    prior_b:   f64,
+}
 
 #[derive(Deserialize)]
-struct CusumParams { file: String, twarmup: f64, plimit: f64 }
+struct CusumParams {
+    file:     String,
+    twarmup:  f64,
+    plimit:   f64,
+}
 
 #[derive(Deserialize)]
-struct PeltParams { dataset: String, penalty: f64, jump: usize, min_size: usize }
+struct PeltParams {
+    dataset:  String,
+    penalty:  f64,
+    jump:     usize,
+    min_size: usize,
+}
 
+/// MicroWatch tuning parameters (7 rows per dataset)
 #[derive(Deserialize)]
 struct WatchParams {
     #[serde(rename = "file_name")]
     dataset: String,
-    distance_index: usize,
-    batch_size: usize,
+
+    distance_index:      usize,
+    batch_size:          usize,
     #[serde(rename = "threshold")]
-    threshold_ratio: f64,
-    max_dist_size: usize,
+    threshold_ratio:     f64,
+    max_dist_size:       usize,
     new_dist_buffer_size: usize,
 }
 
-/// Invoke Python BOCPDMS and parse JSON output
+/// Invoke the Python BOCPDMS script (in `scripts/`) and parse its JSON output.
 fn detect_bocpdms_py(csv_path: &str, params_csv: &str) -> Vec<usize> {
     if cfg!(target_arch = "wasm32") {
         eprintln!("warning: skipping BOCPDMS under WASM");
@@ -960,132 +711,381 @@ fn detect_bocpdms_py(csv_path: &str, params_csv: &str) -> Vec<usize> {
         .output()
         .expect("failed to invoke detect_bocpdms.py");
     if !output.status.success() {
-        panic!("bocpdms script failed:\n{}", String::from_utf8_lossy(&output.stderr));
+        panic!(
+            "bocpdms script failed:\n{}",
+            String::from_utf8_lossy(&output.stderr)
+        );
     }
     serde_json::from_slice(&output.stdout)
         .expect("failed to parse JSON from bocpdms script")
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    // Ensure output directory exists
-    fs::create_dir_all("results")?;
-    // Prepare CSV writer
-    let mut wtr = WriterBuilder::new()
-        .has_headers(true)
-        .from_path("results/results.csv")?;
-    // Write header row
-    wtr.write_record(&[
-        "dataset",
-        "method",
-        "parameters",
-        "change_points"
-    ])?;
+    // ─ load your existing best‐params tables ─────
+    let bocpd_map  = load_params("params/params_bocpd_best.csv",    |p: &BocpdParams|   p.dataset.clone())?;
+    let bms_map    = load_params("params/params_bocpdms_best.csv", |p: &BocpdmsParams| p.dataset.clone())?;
+    let cusum_map  = load_params("params/params_cusum_best.csv",   |p: &CusumParams|   p.file.clone())?;
+    let pelt_map   = load_params("params/params_pelt_best.csv",    |p: &PeltParams|    p.dataset.clone())?;
 
-    // Load parameter tables
-    let bocpd_map  = load_params("params/params_bocpd_best.csv", |p: &BocpdParams| p.dataset.clone())?;
-    let bms_map    = load_params("params/params_bocpdms_best.csv",|p: &BocpdmsParams| p.dataset.clone())?;
-    let cusum_map  = load_params("params/params_cusum_best.csv",  |p: &CusumParams| p.file.clone())?;
-    let pelt_map   = load_params("params/params_pelt_best.csv",   |p: &PeltParams| p.dataset.clone())?;
+    // ─ load all 7 MicroWatch rows, then group by dataset ─────────
     let mut watch_map: HashMap<String, Vec<WatchParams>> = HashMap::new();
     for wp in load_params_list::<WatchParams>("params/params_watch_best.csv")? {
-        watch_map.entry(wp.dataset.clone()).or_default().push(wp);
+        watch_map.entry(wp.dataset.clone())
+                 .or_default()
+                 .push(wp);
     }
 
+    // fallback BOCPD
     let default_bocpd = (0.001, 10.0, 0.1, 0.0);
-    let data_dir = Path::new("datasets/csv");
 
+    // ─ iterate every CSV under datasets/csv ───────────────────────
+    let data_dir = Path::new("datasets/csv");
     for entry in fs::read_dir(data_dir)? {
         let path = entry?.path();
-        if path.extension().and_then(|s| s.to_str()) != Some("csv") { continue; }
-        let name = path.file_stem().unwrap().to_string_lossy().into_owned();
+        if path.extension().and_then(|s| s.to_str()) != Some("csv") {
+            continue;
+        }
+        let name = path.file_stem().unwrap().to_string_lossy();
         let data = load_csv_multi(path.to_str().unwrap())?;
         let rows = data.len();
         let cols = data.get(0).map(|r| r.len()).unwrap_or(0);
 
-        // Helper to join change points
-        let join_cps = |vec: Vec<usize>| vec.iter().map(|i| i.to_string()).collect::<Vec<_>>().join(";");
+        println!("\n=== Dataset: {} ({} rows × {} cols) ===", name, rows, cols);
 
-        // MicroWatch (multivariate vs univariate)
-        if let Some(params_list) = watch_map.get(&name) {
+        // ─── MicroWatch: run all distance_index = 0..6 ────────────
+        if let Some(params_list) = watch_map.get(&*name) {
             if cols > 1 {
+                // multivariate
                 for wp in params_list {
                     let mut mw = MicroWatch::new(wp.distance_index, 0.0, 1);
                     let mut pm = HashMap::new();
-                    pm.insert("batch_size".into(), wp.batch_size as f64);
-                    pm.insert("threshold_ratio".into(), wp.threshold_ratio);
-                    pm.insert("max_dist_size".into(), wp.max_dist_size as f64);
-                    pm.insert("new_dist_buffer_size".into(), wp.new_dist_buffer_size as f64);
-                    mw.set_params(pm.clone());
+                    pm.insert("batch_size".to_string(),           wp.batch_size           as f64);
+                    pm.insert("threshold_ratio".to_string(),      wp.threshold_ratio);
+                    pm.insert("max_dist_size".to_string(),        wp.max_dist_size        as f64);
+                    pm.insert("new_dist_buffer_size".to_string(), wp.new_dist_buffer_size as f64);
+                    mw.set_params(pm);
+
                     let cps = mw.detect_multivariate(&data);
-                    wtr.write_record(&[
-                        &name,
-                        &format!("MicroWatch(idx={})", wp.distance_index),
-                        &format!("{:?}", pm),
-                        &join_cps(cps)
-                    ])?;
+                    println!(
+                        "MicroWatch idx={}  (batch_size={}, threshold_ratio={:.4}, max_dist_size={}, new_dist_buffer_size={}) → {:?}",
+                        wp.distance_index,
+                        wp.batch_size,
+                        wp.threshold_ratio,
+                        wp.max_dist_size,
+                        wp.new_dist_buffer_size,
+                        cps
+                    );
                 }
+
+                let mut pelt = {
+                    let (pen, j, ms) = pelt_map.get(&*name)
+                        .map(|p| (p.penalty, p.jump, p.min_size))
+                        .unwrap_or((100.0, 5, 1));
+                    println!("  PELT params: penalty={}  jump={}  min_size={}", pen, j, ms);
+                    PELT::new(pen, j, ms)
+                };
+                println!("PELT    (multi) → {:?}", pelt.detect_multivariate(&data));
+
+                // Python BOCPDMS
+                let cps = detect_bocpdms_py(path.to_str().unwrap(), "params/params_bocpdms_best.csv");
+                println!("BOCPDMS (multi) → {:?}", cps);
+
             } else {
+                // univariate
                 let univ: Vec<f64> = data.iter().map(|r| r[0]).collect();
                 for wp in params_list {
                     let mut mw = MicroWatch::new(wp.distance_index, 0.0, 1);
                     let mut pm = HashMap::new();
-                    pm.insert("batch_size".into(), wp.batch_size as f64);
-                    pm.insert("threshold_ratio".into(), wp.threshold_ratio);
-                    pm.insert("max_dist_size".into(), wp.max_dist_size as f64);
-                    pm.insert("new_dist_buffer_size".into(), wp.new_dist_buffer_size as f64);
-                    mw.set_params(pm.clone());
+                    pm.insert("batch_size".to_string(),           wp.batch_size           as f64);
+                    pm.insert("threshold_ratio".to_string(),      wp.threshold_ratio);
+                    pm.insert("max_dist_size".to_string(),        wp.max_dist_size        as f64);
+                    pm.insert("new_dist_buffer_size".to_string(), wp.new_dist_buffer_size as f64);
+                    mw.set_params(pm);
+
                     let cps = mw.detect(&univ);
-                    wtr.write_record(&[
-                        &name,
-                        &format!("MicroWatch(idx={})", wp.distance_index),
-                        &format!("{:?}", pm),
-                        &join_cps(cps)
-                    ])?;
+                    println!(
+                        "MicroWatch idx={}  (batch_size={}, threshold_ratio={:.4}, max_dist_size={}, new_dist_buffer_size={}) → {:?}",
+                        wp.distance_index,
+                        wp.batch_size,
+                        wp.threshold_ratio,
+                        wp.max_dist_size,
+                        wp.new_dist_buffer_size,
+                        cps
+                    );
                 }
             }
+        } else {
+            println!("  (no MicroWatch params for `{}`)", name);
         }
 
-        // Other detectors for univariate or multivariate
-        if cols > 1 {
-            // PELT multivariate
-            let (pen,j,ms) = pelt_map.get(&name).map(|p| (p.penalty,p.jump,p.min_size)).unwrap_or((100.0,5,1));
-            let mut pelt = PELT::new(pen, j, ms);
-            let cps = pelt.detect_multivariate(&data);
-            wtr.write_record(&[&name, "PELT(multi)", &format!("penalty={},jump={},min_size={}",pen,j,ms), &join_cps(cps)])?;
-
-            // BOCPDMS multivariate
-            let cps = detect_bocpdms_py(path.to_str().unwrap(), "params/params_bocpdms_best.csv");
-            wtr.write_record(&[&name, "BOCPDMS(multi)", "python-script", &join_cps(cps)])?;
-        } else {
+        // ─── then all your existing detectors ───────────────────────
+        if cols == 1 {
             let univ: Vec<f64> = data.iter().map(|r| r[0]).collect();
 
             // BOCPD
-            let (a,b,k,m) = bocpd_map.get(&name).map(|p| (p.alpha,p.beta,p.kappa,p.mu)).unwrap_or(default_bocpd);
-            let mut bocpd = BOCPD::new(a,b,k,m);
+            let mut bocpd = {
+                let (a,b,k,m) = bocpd_map.get(&*name)
+                    .map(|p| (p.alpha, p.beta, p.kappa, p.mu))
+                    .unwrap_or(default_bocpd);
+                BOCPD::new(a,b,k,m)
+            };
             let mut cps_b = bocpd.detect(&univ);
-            if bocpd_map.contains_key(&name) && cps_b.is_empty() {
-                bocpd = BOCPD::new(default_bocpd.0,default_bocpd.1,default_bocpd.2,default_bocpd.3);
+            if bocpd_map.contains_key(&*name) && cps_b.is_empty() {
+                bocpd = BOCPD::new(default_bocpd.0,
+                                   default_bocpd.1,
+                                   default_bocpd.2,
+                                   default_bocpd.3);
                 cps_b = bocpd.detect(&univ);
             }
-            wtr.write_record(&[&name, "BOCPD", &format!("alpha={},beta={},kappa={},mu={}",a,b,k,m), &join_cps(cps_b)])?;
+            println!("BOCPD   → {:?}", cps_b);
 
             // CUSUM
-            let (tw,pl) = cusum_map.get(&name).map(|p| (p.twarmup as usize, p.plimit)).unwrap_or((5,0.1));
-            let cps_c = CUSUM::new(tw,pl).detect(&univ);
-            wtr.write_record(&[&name, "CUSUM", &format!("twarmup={},plimit={}",tw,pl), &join_cps(cps_c)])?;
+            let (tw,pl) = cusum_map.get(&*name)
+                             .map(|p| (p.twarmup as usize, p.plimit))
+                             .unwrap_or((5,0.1));
+            println!("CUSUM   → {:?}", CUSUM::new(tw,pl).detect(&univ));
 
             // PELT
-            let (pen,j,ms) = pelt_map.get(&name).map(|p| (p.penalty,p.jump,p.min_size)).unwrap_or((100.0,5,1));
-            let cps_p = PELT::new(pen,j,ms).detect(&univ);
-            wtr.write_record(&[&name, "PELT", &format!("penalty={},jump={},min_size={}",pen,j,ms), &join_cps(cps_p)])?;
+            let pelt_cps = {
+                let (pen,j,ms) = pelt_map.get(&*name)
+                    .map(|p| (p.penalty,p.jump,p.min_size))
+                    .unwrap_or((100.0,5,1));
+                PELT::new(pen,j,ms).detect(&univ)
+            };
+            println!("PELT    → {:?}", pelt_cps);
 
-            // BOCPDMS
-            let bms_cps = detect_bocpdms_py(path.to_str().unwrap(), "params/params_bocpdms_best.csv");
-            wtr.write_record(&[&name, "BOCPDMS", "python-script", &join_cps(bms_cps)])?;
+            // Python BOCPDMS
+            let bms_cps = detect_bocpdms_py(path.to_str().unwrap(),
+                                            "params/params_bocpdms_best.csv");
+            println!("BOCPDMS → {:?}", bms_cps);
         }
     }
 
-    // Flush writer
-    wtr.flush()?;
     Ok(())
 }
+
+
+
+
+//saving ubuntu-----------------------------
+
+
+// use std::{collections::HashMap, error::Error, fs, path::Path, process::Command};
+// use serde::Deserialize;
+// use serde_json;
+// use csv::{ReaderBuilder, Trim, WriterBuilder};
+
+// use watch_wasm::utils::load_csv_multi;
+// use watch_wasm::change_point_detector::ChangePointDetector;
+// use watch_wasm::detectors::{BOCPD, CUSUM, MicroWatch, PELT};
+
+// /// Load any CSV/TSV of `D: Deserialize` into a HashMap keyed by `key_fn(&D)`.
+// fn load_params<D>(
+//     path: &str,
+//     key_fn: impl Fn(&D) -> String,
+// ) -> Result<HashMap<String, D>, Box<dyn Error>>
+// where
+//     for<'de> D: Deserialize<'de>,
+// {
+//     let text = fs::read_to_string(path)?;
+//     let first = text.lines().next().unwrap_or("");
+//     let delim = if first.contains('\t') { b'\t' } else { b',' };
+//     let mut rdr = ReaderBuilder::new()
+//         .delimiter(delim)
+//         .trim(Trim::All)
+//         .from_reader(text.as_bytes());
+//     let mut map = HashMap::new();
+//     for rec in rdr.deserialize() {
+//         let rec: D = rec?;
+//         map.insert(key_fn(&rec), rec);
+//     }
+//     Ok(map)
+// }
+
+// /// Load any CSV/TSV into a Vec for MicroWatch (7 rows per dataset)
+// fn load_params_list<D>(
+//     path: &str,
+// ) -> Result<Vec<D>, Box<dyn Error>>
+// where
+//     for<'de> D: Deserialize<'de>,
+// {
+//     let text = fs::read_to_string(path)?;
+//     let first = text.lines().next().unwrap_or("");
+//     let delim = if first.contains('\t') { b'\t' } else { b',' };
+//     let mut rdr = ReaderBuilder::new()
+//         .delimiter(delim)
+//         .trim(Trim::All)
+//         .from_reader(text.as_bytes());
+//     let mut v = Vec::new();
+//     for rec in rdr.deserialize() {
+//         v.push(rec?);
+//     }
+//     Ok(v)
+// }
+
+// #[derive(Deserialize)]
+// struct BocpdParams { dataset: String, alpha: f64, beta: f64, kappa: f64, mu: f64 }
+
+// #[derive(Deserialize)]
+// struct BocpdmsParams { dataset: String, intensity: f64, prior_a: f64, prior_b: f64 }
+
+// #[derive(Deserialize)]
+// struct CusumParams { file: String, twarmup: f64, plimit: f64 }
+
+// #[derive(Deserialize)]
+// struct PeltParams { dataset: String, penalty: f64, jump: usize, min_size: usize }
+
+// #[derive(Deserialize)]
+// struct WatchParams {
+//     #[serde(rename = "file_name")]
+//     dataset: String,
+//     distance_index: usize,
+//     batch_size: usize,
+//     #[serde(rename = "threshold")]
+//     threshold_ratio: f64,
+//     max_dist_size: usize,
+//     new_dist_buffer_size: usize,
+// }
+
+// /// Invoke Python BOCPDMS and parse JSON output
+// fn detect_bocpdms_py(csv_path: &str, params_csv: &str) -> Vec<usize> {
+//     if cfg!(target_arch = "wasm32") {
+//         eprintln!("warning: skipping BOCPDMS under WASM");
+//         return Vec::new();
+//     }
+//     let output = Command::new("python3")
+//         .arg("scripts/detect_bocpdms.py")
+//         .arg(csv_path)
+//         .arg(params_csv)
+//         .output()
+//         .expect("failed to invoke detect_bocpdms.py");
+//     if !output.status.success() {
+//         panic!("bocpdms script failed:\n{}", String::from_utf8_lossy(&output.stderr));
+//     }
+//     serde_json::from_slice(&output.stdout)
+//         .expect("failed to parse JSON from bocpdms script")
+// }
+
+// fn main() -> Result<(), Box<dyn Error>> {
+//     // Ensure output directory exists
+//     fs::create_dir_all("results")?;
+//     // Prepare CSV writer
+//     let mut wtr = WriterBuilder::new()
+//         .has_headers(true)
+//         .from_path("results/results.csv")?;
+//     // Write header row
+//     wtr.write_record(&[
+//         "dataset",
+//         "method",
+//         "parameters",
+//         "change_points"
+//     ])?;
+
+//     // Load parameter tables
+//     let bocpd_map  = load_params("params/params_bocpd_best.csv", |p: &BocpdParams| p.dataset.clone())?;
+//     let bms_map    = load_params("params/params_bocpdms_best.csv",|p: &BocpdmsParams| p.dataset.clone())?;
+//     let cusum_map  = load_params("params/params_cusum_best.csv",  |p: &CusumParams| p.file.clone())?;
+//     let pelt_map   = load_params("params/params_pelt_best.csv",   |p: &PeltParams| p.dataset.clone())?;
+//     let mut watch_map: HashMap<String, Vec<WatchParams>> = HashMap::new();
+//     for wp in load_params_list::<WatchParams>("params/params_watch_best.csv")? {
+//         watch_map.entry(wp.dataset.clone()).or_default().push(wp);
+//     }
+
+//     let default_bocpd = (0.001, 10.0, 0.1, 0.0);
+//     let data_dir = Path::new("datasets/csv");
+
+//     for entry in fs::read_dir(data_dir)? {
+//         let path = entry?.path();
+//         if path.extension().and_then(|s| s.to_str()) != Some("csv") { continue; }
+//         let name = path.file_stem().unwrap().to_string_lossy().into_owned();
+//         let data = load_csv_multi(path.to_str().unwrap())?;
+//         let rows = data.len();
+//         let cols = data.get(0).map(|r| r.len()).unwrap_or(0);
+
+//         // Helper to join change points
+//         let join_cps = |vec: Vec<usize>| vec.iter().map(|i| i.to_string()).collect::<Vec<_>>().join(";");
+
+//         // MicroWatch (multivariate vs univariate)
+//         if let Some(params_list) = watch_map.get(&name) {
+//             if cols > 1 {
+//                 for wp in params_list {
+//                     let mut mw = MicroWatch::new(wp.distance_index, 0.0, 1);
+//                     let mut pm = HashMap::new();
+//                     pm.insert("batch_size".into(), wp.batch_size as f64);
+//                     pm.insert("threshold_ratio".into(), wp.threshold_ratio);
+//                     pm.insert("max_dist_size".into(), wp.max_dist_size as f64);
+//                     pm.insert("new_dist_buffer_size".into(), wp.new_dist_buffer_size as f64);
+//                     mw.set_params(pm.clone());
+//                     let cps = mw.detect_multivariate(&data);
+//                     wtr.write_record(&[
+//                         &name,
+//                         &format!("MicroWatch(idx={})", wp.distance_index),
+//                         &format!("{:?}", pm),
+//                         &join_cps(cps)
+//                     ])?;
+//                 }
+//             } else {
+//                 let univ: Vec<f64> = data.iter().map(|r| r[0]).collect();
+//                 for wp in params_list {
+//                     let mut mw = MicroWatch::new(wp.distance_index, 0.0, 1);
+//                     let mut pm = HashMap::new();
+//                     pm.insert("batch_size".into(), wp.batch_size as f64);
+//                     pm.insert("threshold_ratio".into(), wp.threshold_ratio);
+//                     pm.insert("max_dist_size".into(), wp.max_dist_size as f64);
+//                     pm.insert("new_dist_buffer_size".into(), wp.new_dist_buffer_size as f64);
+//                     mw.set_params(pm.clone());
+//                     let cps = mw.detect(&univ);
+//                     wtr.write_record(&[
+//                         &name,
+//                         &format!("MicroWatch(idx={})", wp.distance_index),
+//                         &format!("{:?}", pm),
+//                         &join_cps(cps)
+//                     ])?;
+//                 }
+//             }
+//         }
+
+//         // Other detectors for univariate or multivariate
+//         if cols > 1 {
+//             // PELT multivariate
+//             let (pen,j,ms) = pelt_map.get(&name).map(|p| (p.penalty,p.jump,p.min_size)).unwrap_or((100.0,5,1));
+//             let mut pelt = PELT::new(pen, j, ms);
+//             let cps = pelt.detect_multivariate(&data);
+//             wtr.write_record(&[&name, "PELT(multi)", &format!("penalty={},jump={},min_size={}",pen,j,ms), &join_cps(cps)])?;
+
+//             // BOCPDMS multivariate
+//             let cps = detect_bocpdms_py(path.to_str().unwrap(), "params/params_bocpdms_best.csv");
+//             wtr.write_record(&[&name, "BOCPDMS(multi)", "python-script", &join_cps(cps)])?;
+//         } else {
+//             let univ: Vec<f64> = data.iter().map(|r| r[0]).collect();
+
+//             // BOCPD
+//             let (a,b,k,m) = bocpd_map.get(&name).map(|p| (p.alpha,p.beta,p.kappa,p.mu)).unwrap_or(default_bocpd);
+//             let mut bocpd = BOCPD::new(a,b,k,m);
+//             let mut cps_b = bocpd.detect(&univ);
+//             if bocpd_map.contains_key(&name) && cps_b.is_empty() {
+//                 bocpd = BOCPD::new(default_bocpd.0,default_bocpd.1,default_bocpd.2,default_bocpd.3);
+//                 cps_b = bocpd.detect(&univ);
+//             }
+//             wtr.write_record(&[&name, "BOCPD", &format!("alpha={},beta={},kappa={},mu={}",a,b,k,m), &join_cps(cps_b)])?;
+
+//             // CUSUM
+//             let (tw,pl) = cusum_map.get(&name).map(|p| (p.twarmup as usize, p.plimit)).unwrap_or((5,0.1));
+//             let cps_c = CUSUM::new(tw,pl).detect(&univ);
+//             wtr.write_record(&[&name, "CUSUM", &format!("twarmup={},plimit={}",tw,pl), &join_cps(cps_c)])?;
+
+//             // PELT
+//             let (pen,j,ms) = pelt_map.get(&name).map(|p| (p.penalty,p.jump,p.min_size)).unwrap_or((100.0,5,1));
+//             let cps_p = PELT::new(pen,j,ms).detect(&univ);
+//             wtr.write_record(&[&name, "PELT", &format!("penalty={},jump={},min_size={}",pen,j,ms), &join_cps(cps_p)])?;
+
+//             // BOCPDMS
+//             let bms_cps = detect_bocpdms_py(path.to_str().unwrap(), "params/params_bocpdms_best.csv");
+//             wtr.write_record(&[&name, "BOCPDMS", "python-script", &join_cps(bms_cps)])?;
+//         }
+//     }
+
+//     // Flush writer
+//     wtr.flush()?;
+//     Ok(())
+// }

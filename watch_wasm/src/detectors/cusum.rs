@@ -2,7 +2,6 @@ use crate::utils::erf;
 use crate::change_point_detector::ChangePointDetector;
 use std::collections::HashMap;
 
-
 pub struct CUSUM {
     t_warmup:    usize,
     p_limit:     f64,
@@ -13,7 +12,6 @@ pub struct CUSUM {
 }
 
 impl CUSUM {
-
     pub fn new(_t_warmup: usize, _p_limit: f64) -> Self {
         let t_warmup = 30;
         let p_limit  = 0.01;

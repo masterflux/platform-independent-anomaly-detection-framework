@@ -4,6 +4,7 @@ use crate::distance_measures::DistanceMeasures;
 use crate::change_point_detector::ChangePointDetector;
 use std::collections::HashMap;
 
+/// MicroWatch: batch‐based distance‐to‐mean change point detector
 pub struct MicroWatch {
     threshold_ratio:      f64,
     max_dist_size:        usize,
@@ -120,8 +121,6 @@ impl ChangePointDetector for MicroWatch {
         change_points
     }
 
-    /// Call this with a HashMap<String,f64> built from your tuned‐params CSV:
-    /// e.g. { "batch_size": 8.0, "threshold_ratio": 0.45, ... }
     fn set_params(&mut self, params: HashMap<String, f64>) {
         if let Some(&tr)  = params.get("threshold_ratio")      { self.threshold_ratio      = tr;  }
         if let Some(&mds) = params.get("max_dist_size")        { self.max_dist_size        = mds as usize; }
