@@ -2,14 +2,6 @@ use crate::utils::erf;
 use crate::change_point_detector::ChangePointDetector;
 use std::collections::HashMap;
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
-/// CUSUM change‐point detector
->>>>>>> d719506060314435b622b74a3c80976d99a80752
->>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
 pub struct CUSUM {
     t_warmup:    usize,
     p_limit:     f64,
@@ -20,17 +12,6 @@ pub struct CUSUM {
 }
 
 impl CUSUM {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
-    /// Create a new CUSUM detector.
-    ///
-    /// **Note**: to exactly mimic the Python version’s (buggy) defaults,
-    /// we ignore the passed‐in arguments and always use warmup=30, plimit=0.01.
->>>>>>> d719506060314435b622b74a3c80976d99a80752
->>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
     pub fn new(_t_warmup: usize, _p_limit: f64) -> Self {
         let t_warmup = 30;
         let p_limit  = 0.01;
@@ -44,15 +25,7 @@ impl CUSUM {
         }
     }
 
-<<<<<<< HEAD
     
-=======
-<<<<<<< HEAD
-    
-=======
-    /// Reset the running statistics after a detected change‐point
->>>>>>> d719506060314435b622b74a3c80976d99a80752
->>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
     fn reset(&mut self) {
         self.current_t    = 0;
         self.current_obs.clear();
@@ -60,15 +33,7 @@ impl CUSUM {
         self.current_std  = 0.1;
     }
 
-<<<<<<< HEAD
     
-=======
-<<<<<<< HEAD
-    
-=======
-    /// Initialize mean and stddev once we've accumulated `t_warmup` points
->>>>>>> d719506060314435b622b74a3c80976d99a80752
->>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
     fn init_params(&mut self) {
         let n = self.current_obs.len() as f64;
         // population mean
@@ -89,15 +54,7 @@ impl CUSUM {
         2.0 * (1.0 - p)
     }
 
-<<<<<<< HEAD
     /// Process the next point
-=======
-<<<<<<< HEAD
-    /// Process the next point
-=======
-    /// Process the next point, returning (score, is_change_point)
->>>>>>> d719506060314435b622b74a3c80976d99a80752
->>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
     fn predict_next(&mut self, y: f64) -> (f64, bool) {
         self.current_t += 1;
         self.current_obs.push(y);
@@ -138,15 +95,7 @@ impl ChangePointDetector for CUSUM {
     }
 
     fn set_params(&mut self, params: HashMap<String, f64>) {
-<<<<<<< HEAD
         // allow overriding the defaults 
-=======
-<<<<<<< HEAD
-        // allow overriding the defaults 
-=======
-        // allow overriding the defaults if desired
->>>>>>> d719506060314435b622b74a3c80976d99a80752
->>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
         if let Some(&t) = params.get("t_warmup") {
             self.t_warmup = t as usize;
         }

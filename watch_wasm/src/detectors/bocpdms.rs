@@ -1,22 +1,7 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-// src/detectors/bocpdms.rs
->>>>>>> d719506060314435b622b74a3c80976d99a80752
->>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
 
 use crate::change_point_detector::ChangePointDetector;
 use std::collections::HashMap;
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
-/// A very simple BOCPDMS‐style detector: compares variances in a sliding window.
->>>>>>> d719506060314435b622b74a3c80976d99a80752
->>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
 pub struct BOCPDMS {
     prior_a:   f64,
     prior_b:   f64,
@@ -24,28 +9,12 @@ pub struct BOCPDMS {
 }
 
 impl BOCPDMS {
-<<<<<<< HEAD
     
-=======
-<<<<<<< HEAD
-    
-=======
-    /// Create a new BOCPDMS detector with hyperparameters.
->>>>>>> d719506060314435b622b74a3c80976d99a80752
->>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
     pub fn new(prior_a: f64, prior_b: f64, intensity: f64) -> Self {
         Self { prior_a, prior_b, intensity }
     }
 
-<<<<<<< HEAD
    
-=======
-<<<<<<< HEAD
-   
-=======
-    /// Core univariate variance‐ratio change‐point logic.
->>>>>>> d719506060314435b622b74a3c80976d99a80752
->>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
     fn detect_variance_change(&self, data: &[f64], window_size: usize) -> Vec<usize> {
         let mut cps = Vec::new();
         if data.len() < 2 * window_size {
@@ -78,15 +47,7 @@ impl BOCPDMS {
         cps
     }
 
-<<<<<<< HEAD
     
-=======
-<<<<<<< HEAD
-    
-=======
-    /// Collapse a multivariate series (by row‐means) then run the above univariate detector.
->>>>>>> d719506060314435b622b74a3c80976d99a80752
->>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
     pub fn detect_multivariate(&mut self, data: &[Vec<f64>]) -> Vec<usize> {
         let univ: Vec<f64> = data
             .iter()
@@ -97,29 +58,13 @@ impl BOCPDMS {
 }
 
 impl ChangePointDetector for BOCPDMS {
-<<<<<<< HEAD
     
-=======
-<<<<<<< HEAD
-    
-=======
-    /// Univariate API (uses a fixed window size of 20).
->>>>>>> d719506060314435b622b74a3c80976d99a80752
->>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
     fn detect(&mut self, data: &[f64]) -> Vec<usize> {
         self.detect_variance_change(data, 20)
     }
 
     fn set_params(&mut self, _params: HashMap<String, f64>) {
-<<<<<<< HEAD
         
-=======
-<<<<<<< HEAD
-        
-=======
-        // no‐op: we pass hyperparams in via `new(...)` in main.rs
->>>>>>> d719506060314435b622b74a3c80976d99a80752
->>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
     }
 
     fn reinit(&mut self) {
