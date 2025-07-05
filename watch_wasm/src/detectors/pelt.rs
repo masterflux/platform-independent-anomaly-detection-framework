@@ -1,6 +1,14 @@
 use crate::change_point_detector::ChangePointDetector;
 use std::collections::HashMap;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+/// Compute condensed squared‐euclidean distances
+>>>>>>> d719506060314435b622b74a3c80976d99a80752
+>>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
 fn pdist(rows: &[Vec<f64>]) -> Vec<f64> {
     let n = rows.len();
     let mut out = Vec::with_capacity(n * (n - 1) / 2);
@@ -16,6 +24,14 @@ fn pdist(rows: &[Vec<f64>]) -> Vec<f64> {
     out
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+/// Turn a condensed pdist vector into a full symmetric matrix
+>>>>>>> d719506060314435b622b74a3c80976d99a80752
+>>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
 fn squareform(cond: &[f64]) -> Vec<Vec<f64>> {
     let s = cond.len();
     let d = ((1.0 + (1.0 + 8.0 * (s as f64)).sqrt()) / 2.0).round() as usize;
@@ -32,12 +48,30 @@ fn squareform(cond: &[f64]) -> Vec<Vec<f64>> {
     m
 }
 
+<<<<<<< HEAD
 
 struct CostRbf {
     min_size:    usize,
     gram:        Vec<Vec<f64>>,
     psum:        Vec<Vec<f64>>, 
     diag_prefix: Vec<f64>,      
+=======
+<<<<<<< HEAD
+
+struct CostRbf {
+    min_size:    usize,
+    gram:        Vec<Vec<f64>>,
+    psum:        Vec<Vec<f64>>, 
+    diag_prefix: Vec<f64>,      
+=======
+/// RBF‐kernel cost with O(1) segment error queries
+struct CostRbf {
+    min_size:    usize,
+    gram:        Vec<Vec<f64>>,
+    psum:        Vec<Vec<f64>>, // prefix sums
+    diag_prefix: Vec<f64>,      // diagonal prefix sums
+>>>>>>> d719506060314435b622b74a3c80976d99a80752
+>>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
     n:           usize,
 }
 
@@ -46,22 +80,52 @@ impl CostRbf {
         Self { min_size, gram: Vec::new(), psum: Vec::new(), diag_prefix: Vec::new(), n: 0 }
     }
 
+<<<<<<< HEAD
     
     fn fit(&mut self, rows: &[Vec<f64>]) {
         self.n = rows.len();
         
+=======
+<<<<<<< HEAD
+    
+    fn fit(&mut self, rows: &[Vec<f64>]) {
+        self.n = rows.len();
+        
+=======
+    /// Build gram, psum and diag_prefix from raw rows
+    fn fit(&mut self, rows: &[Vec<f64>]) {
+        self.n = rows.len();
+        // 1) median‐heuristic γ
+>>>>>>> d719506060314435b622b74a3c80976d99a80752
+>>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
         let mut d2 = pdist(rows);
         d2.retain(|v| v.is_finite());
         d2.sort_unstable_by(|a, b| a.partial_cmp(b).unwrap());
         let gamma = d2.get(d2.len()/2).filter(|&&m| m>0.0).map(|&m|1.0/m).unwrap_or(1.0);
 
+<<<<<<< HEAD
         
+=======
+<<<<<<< HEAD
+        
+=======
+        // 2) build full RBF Gram
+>>>>>>> d719506060314435b622b74a3c80976d99a80752
+>>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
         let sq = squareform(&pdist(rows));
         self.gram = sq.into_iter()
             .map(|row| row.into_iter().map(|d2| (-(gamma*d2)).exp()).collect())
             .collect();
 
+<<<<<<< HEAD
         
+=======
+<<<<<<< HEAD
+        
+=======
+        // 3) build prefix sums
+>>>>>>> d719506060314435b622b74a3c80976d99a80752
+>>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
         let n = self.n;
         let mut ps = vec![vec![0.0; n+1]; n+1];
         for i in 0..n {
@@ -79,7 +143,15 @@ impl CostRbf {
         self.diag_prefix = dp;
     }
 
+<<<<<<< HEAD
     
+=======
+<<<<<<< HEAD
+    
+=======
+    /// O(1) kernel‐cost of segment [start,end)
+>>>>>>> d719506060314435b622b74a3c80976d99a80752
+>>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
     fn error(&self, start: usize, end: usize) -> f64 {
         let len = end.saturating_sub(start);
         if len < self.min_size { return f64::INFINITY; }
@@ -90,6 +162,14 @@ impl CostRbf {
     }
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+/// Optimal partitioning with pruning (PELT)
+>>>>>>> d719506060314435b622b74a3c80976d99a80752
+>>>>>>> 2ad82533ed3e36eb77f2113fccb6bbd90e87bbef
 pub struct PELT {
     pen:       f64,
     min_size:  usize,

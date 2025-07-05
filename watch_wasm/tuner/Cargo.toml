@@ -1,9 +1,0 @@
-[package]
-name = "tuner"
-version = "0.1.0"
-edition = "2024"
-
-[dependencies]
-watch_wasm = { path = "D:/University/Dissertation/Code/platform-independent-anomaly-detection-framework/watch_wasm" }
-serde       = "1.0"
-serde_json  = "1.0"
