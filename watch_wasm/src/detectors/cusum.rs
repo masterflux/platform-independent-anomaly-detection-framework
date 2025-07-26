@@ -36,9 +36,9 @@ impl CUSUM {
     
     fn init_params(&mut self) {
         let n = self.current_obs.len() as f64;
-        // population mean
+        
         self.current_mean = self.current_obs.iter().sum::<f64>() / n;
-        // population stddev (divide by n), matching numpy.std
+        
         let var = self
             .current_obs
             .iter()
@@ -48,13 +48,13 @@ impl CUSUM {
         self.current_std = var.sqrt();
     }
 
-    /// Two‐sided Gaussian tail probability
+    
     fn get_prob(&self, y: f64) -> f64 {
         let p = 0.5 * (1.0 + erf(y.abs() / 2.0f64.sqrt()));
         2.0 * (1.0 - p)
     }
 
-    /// Process the next point
+    
     fn predict_next(&mut self, y: f64) -> (f64, bool) {
         self.current_t += 1;
         self.current_obs.push(y);
@@ -95,7 +95,7 @@ impl ChangePointDetector for CUSUM {
     }
 
     fn set_params(&mut self, params: HashMap<String, f64>) {
-        // allow overriding the defaults 
+        
         if let Some(&t) = params.get("t_warmup") {
             self.t_warmup = t as usize;
         }

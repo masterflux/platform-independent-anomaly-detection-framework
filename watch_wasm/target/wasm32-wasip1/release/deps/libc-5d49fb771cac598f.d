@@ -1,0 +1,10 @@
+D:\University\Dissertation\Code\platform-independent-anomaly-detection-framework\watch_wasm\target\wasm32-wasip1\release\deps\libc-5d49fb771cac598f.d: C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\libc-0.2.172\src\lib.rs C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\libc-0.2.172\src\macros.rs C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\libc-0.2.172\src\primitives.rs C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\libc-0.2.172\src\wasi\mod.rs
+
+D:\University\Dissertation\Code\platform-independent-anomaly-detection-framework\watch_wasm\target\wasm32-wasip1\release\deps\liblibc-5d49fb771cac598f.rlib: C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\libc-0.2.172\src\lib.rs C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\libc-0.2.172\src\macros.rs C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\libc-0.2.172\src\primitives.rs C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\libc-0.2.172\src\wasi\mod.rs
+
+D:\University\Dissertation\Code\platform-independent-anomaly-detection-framework\watch_wasm\target\wasm32-wasip1\release\deps\liblibc-5d49fb771cac598f.rmeta: C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\libc-0.2.172\src\lib.rs C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\libc-0.2.172\src\macros.rs C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\libc-0.2.172\src\primitives.rs C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\libc-0.2.172\src\wasi\mod.rs
+
+C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\libc-0.2.172\src\lib.rs:
+C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\libc-0.2.172\src\macros.rs:
+C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\libc-0.2.172\src\primitives.rs:
+C:\Users\vibma\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\libc-0.2.172\src\wasi\mod.rs:

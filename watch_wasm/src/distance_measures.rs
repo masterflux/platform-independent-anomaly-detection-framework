@@ -18,12 +18,12 @@ impl DistanceMeasures {
          .sum::<f64>()
     }
 
-    pub fn chebyshev(u: &[f64], v: &[f64]) -> f64 {
-        u.iter()
-         .zip(v.iter())
-         .map(|(a, b)| (a - b).abs())
-         .fold(0.0, f64::max)
-    }
+   pub fn chebyshev_min(u: &[f64], v: &[f64]) -> f64 {
+    u.iter()
+     .zip(v.iter())
+     .map(|(a, b)| (a - b).abs())
+     .fold(f64::INFINITY, f64::min)
+}
 
     pub fn kl_divergence(u: &[f64], v: &[f64]) -> f64 {
         const EPSILON: f64 = 1e-10;
@@ -52,13 +52,13 @@ impl DistanceMeasures {
          .sum::<f64>()
     }
 
-    pub fn bhattacharyya(u: &[f64], v: &[f64]) -> f64 {
-        -u.iter()
-          .zip(v.iter())
-          .map(|(a, b)| (a * b).sqrt())
-          .sum::<f64>()
-          .ln()
-    }
+  pub fn bhattacharyya(u: &[f64], v: &[f64]) -> f64 {
+    -((u.iter()
+        .zip(v.iter())
+        .map(|(a, b)| (a * b).sqrt())
+        .sum::<f64>())
+        .ln())
+}
 
     pub fn hellinger(u: &[f64], v: &[f64]) -> f64 {
         (2.0 * u.iter()
@@ -82,9 +82,9 @@ impl DistanceMeasures {
 
     pub fn get_distance_function(index: usize) -> fn(&[f64], &[f64]) -> f64 {
         match index {
-            0 => Self::bhattacharyya, //2
-            1 => Self::chebyshev, // 5
-            2 => Self::euclidean, // 10
+            0 => Self::bhattacharyya, //2 //3 on paper
+            1 => Self::chebyshev_min, // 6 //7 on paper
+            2 => Self::euclidean, // 10 //11 on paper
             3 => Self::hellinger, // 13
             4 => Self::jensen_shannon_divergence, // 16
             5 => Self::kl_divergence, // 18
