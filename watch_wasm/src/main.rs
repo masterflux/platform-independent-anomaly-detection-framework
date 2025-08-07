@@ -4,9 +4,7 @@ use std::{
     fs,
     path::Path,
     io::{stdin, stdout, Write},
-    time::{Instant, SystemTime, UNIX_EPOCH},
-    thread,
-    time::Duration,
+    time::Instant,
 };
 
 use serde::Deserialize;
@@ -90,11 +88,6 @@ struct WatchParams {
     new_dist_buffer_size: usize,
 }
 
-fn current_timestamp() -> String {
-    let now = SystemTime::now().duration_since(UNIX_EPOCH).unwrap();
-    format!("{}", now.as_secs())
-}
-
 fn print_result_block(method: &str, params: &str, cp_str: &str, t: f64) {
     println!("┌──────── {} ─────────", method);
     println!("│ Parameters : {}", params);
@@ -104,13 +97,6 @@ fn print_result_block(method: &str, params: &str, cp_str: &str, t: f64) {
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-
-    println!("Do you want to add delays? (yes/no): ");
-    stdout().flush()?;
-    let mut delay_input = String::new();
-    stdin().read_line(&mut delay_input)?;
-    let add_delay = delay_input.trim().eq_ignore_ascii_case("yes");
-
     // Prompt user
     println!("Available algorithms: MicroWatch, BOCPD, CUSUM, PELT, all");
     print!("Enter comma-separated list or 'all': ");
@@ -145,10 +131,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         "parameters",
         "change_points",
         "time_ms",
-        "idle_start_ts",
-        "idle_end_ts",
-        "proc_start_ts",
-        "proc_end_ts",
     ])?;
 
     
@@ -165,16 +147,8 @@ fn main() -> Result<(), Box<dyn Error>> {
 
         println!("\n=== Dataset: {} ({} cols detected) ===", dataset, cols);
 
-        let idle_start_ts = current_timestamp();
-        if add_delay {
-            println!("Measuring idle baseline for 30 seconds before processing...");
-            thread::sleep(Duration::from_secs(30));
-        }
-        let idle_end_ts = current_timestamp();
-
         
         let ds_start = Instant::now();
-        let proc_start_ts = current_timestamp();
 
         // MicroWatch 0 - 6
         if run_all || choices.contains("microwatch") {
@@ -197,17 +171,12 @@ fn main() -> Result<(), Box<dyn Error>> {
                     let method = format!("MicroWatch(idx={})", wp.distance_index);
                     let params_json = serde_json::to_string(&pm)?;
                     let cp_str = cps.iter().map(|i| i.to_string()).collect::<Vec<_>>().join(";");
-                    let proc_end_ts = current_timestamp();
                     wtr.write_record(&[
                         dataset.as_ref(),
                         &method,
                         &params_json,
                         &cp_str,
                         &format!("{:.3}", t),
-                        &idle_start_ts,
-                        &idle_end_ts,
-                        &proc_start_ts,
-                        &proc_end_ts,
                     ])?;
                     print_result_block(&method, &params_json, &cp_str, t);
                 }
@@ -228,17 +197,12 @@ fn main() -> Result<(), Box<dyn Error>> {
             let method = "BOCPD";
             let params = format!("alpha={}, beta={}, kappa={}, mu={}", a, b, k, m);
             let cp_str = cps.iter().map(|i| i.to_string()).collect::<Vec<_>>().join(";");
-            let proc_end_ts = current_timestamp();
             wtr.write_record(&[
                 dataset.as_ref(),
                 method,
                 &params,
                 &cp_str,
                 &format!("{:.3}", t),
-                &idle_start_ts,
-                &idle_end_ts,
-                &proc_start_ts,
-                &proc_end_ts,
             ])?;
             print_result_block(method, &params, &cp_str, t);
         }
@@ -256,17 +220,12 @@ fn main() -> Result<(), Box<dyn Error>> {
             let method = "CUSUM";
             let params = format!("twarmup={}, plimit={}", tw, pl);
             let cp_str = cps.iter().map(|i| i.to_string()).collect::<Vec<_>>().join(";");
-            let proc_end_ts = current_timestamp();
             wtr.write_record(&[
                 dataset.as_ref(),
                 method,
                 &params,
                 &cp_str,
                 &format!("{:.3}", t),
-                &idle_start_ts,
-                &idle_end_ts,
-                &proc_start_ts,
-                &proc_end_ts,
             ])?;
             print_result_block(method, &params, &cp_str, t);
         }
@@ -284,17 +243,12 @@ fn main() -> Result<(), Box<dyn Error>> {
             let method = "PELT";
             let params = format!("penalty={}, jump={}, min_size={}", pen, j, ms);
             let cp_str = cps.iter().map(|i| i.to_string()).collect::<Vec<_>>().join(";");
-            let proc_end_ts = current_timestamp();
             wtr.write_record(&[
                 dataset.as_ref(),
                 method,
                 &params,
                 &cp_str,
                 &format!("{:.3}", t),
-                &idle_start_ts,
-                &idle_end_ts,
-                &proc_start_ts,
-                &proc_end_ts,
             ])?;
             print_result_block(method, &params, &cp_str, t);
         }
@@ -303,12 +257,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         let total = ds_start.elapsed().as_secs_f64() * 1000.0;
         durations_ms.push(total);
         println!("→ Total time for {}: {:.3} ms", dataset, total);
-
-        
-        if add_delay {
-            println!("Waiting 30 seconds before next dataset...");
-            thread::sleep(Duration::from_secs(30));
-        }
     }
 
     wtr.flush()?;

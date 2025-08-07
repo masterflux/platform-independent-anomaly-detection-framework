@@ -1,0 +1,413 @@
+dataset,method,parameters,change_points,time_ms
+apple,MicroWatch(idx=0),"{""batch_size"":4.0,""max_dist_size"":27.0,""new_dist_buffer_size"":4.0,""threshold_ratio"":0.125298284}",,0.034
+apple,MicroWatch(idx=1),"{""threshold_ratio"":3.284828172,""max_dist_size"":17.0,""new_dist_buffer_size"":20.0,""batch_size"":5.0}",130;200;230;275;320,0.040
+apple,MicroWatch(idx=2),"{""max_dist_size"":21.0,""new_dist_buffer_size"":38.0,""threshold_ratio"":3.139910919,""batch_size"":3.0}",54,0.034
+apple,MicroWatch(idx=3),"{""batch_size"":6.0,""new_dist_buffer_size"":41.0,""threshold_ratio"":3.86760245,""max_dist_size"":51.0}",,0.035
+apple,MicroWatch(idx=4),"{""batch_size"":3.0,""new_dist_buffer_size"":37.0,""max_dist_size"":71.0,""threshold_ratio"":0.525455704}",48;318,0.187
+apple,MicroWatch(idx=5),"{""batch_size"":6.0,""threshold_ratio"":0.732082852,""max_dist_size"":86.0,""new_dist_buffer_size"":30.0}",48;318,0.119
+apple,MicroWatch(idx=6),"{""threshold_ratio"":1.105742671,""max_dist_size"":53.0,""new_dist_buffer_size"":20.0,""batch_size"":3.0}",24;54;318,0.069
+apple,PELT,"penalty=5, jump=6, min_size=1",101;131;199;223;244;265;286;319;417;462;546;605;622,49.002
+bank,MicroWatch(idx=0),"{""threshold_ratio"":0.307721167,""batch_size"":5.0,""max_dist_size"":35.0,""new_dist_buffer_size"":8.0}",,0.023
+bank,MicroWatch(idx=1),"{""new_dist_buffer_size"":26.0,""batch_size"":3.0,""max_dist_size"":35.0,""threshold_ratio"":2.39160933}",,0.024
+bank,MicroWatch(idx=2),"{""threshold_ratio"":2.720781393,""batch_size"":6.0,""max_dist_size"":50.0,""new_dist_buffer_size"":30.0}",,0.019
+bank,MicroWatch(idx=3),"{""max_dist_size"":21.0,""batch_size"":5.0,""threshold_ratio"":2.777395497,""new_dist_buffer_size"":41.0}",,0.018
+bank,MicroWatch(idx=4),"{""batch_size"":3.0,""max_dist_size"":50.0,""new_dist_buffer_size"":46.0,""threshold_ratio"":3.162353655}",,0.027
+bank,MicroWatch(idx=5),"{""batch_size"":4.0,""threshold_ratio"":2.154273858,""max_dist_size"":84.0,""new_dist_buffer_size"":40.0}",,0.034
+bank,MicroWatch(idx=6),"{""batch_size"":5.0,""max_dist_size"":94.0,""threshold_ratio"":2.397339882,""new_dist_buffer_size"":24.0}",,0.028
+bank,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,10.660
+bank,CUSUM,"twarmup=298, plimit=0.05299083062286661",68;116;246;292;392;435;531,0.013
+bank,PELT,"penalty=20, jump=1, min_size=1",581,23.595
+bee_waggle_6,MicroWatch(idx=0),"{""max_dist_size"":93.0,""batch_size"":4.0,""threshold_ratio"":0.628242871,""new_dist_buffer_size"":49.0}",,0.047
+bee_waggle_6,MicroWatch(idx=1),"{""max_dist_size"":34.0,""threshold_ratio"":2.141205214,""new_dist_buffer_size"":50.0,""batch_size"":5.0}",,0.026
+bee_waggle_6,MicroWatch(idx=2),"{""batch_size"":6.0,""new_dist_buffer_size"":40.0,""threshold_ratio"":3.719955787,""max_dist_size"":99.0}",,0.037
+bee_waggle_6,MicroWatch(idx=3),"{""batch_size"":3.0,""new_dist_buffer_size"":26.0,""threshold_ratio"":2.843846528,""max_dist_size"":54.0}",,0.039
+bee_waggle_6,MicroWatch(idx=4),"{""batch_size"":5.0,""max_dist_size"":30.0,""threshold_ratio"":0.81995813,""new_dist_buffer_size"":38.0}",40;85;125;165;255;340;380;420;490;530;570,0.070
+bee_waggle_6,MicroWatch(idx=5),"{""max_dist_size"":85.0,""threshold_ratio"":0.875019289,""batch_size"":5.0,""new_dist_buffer_size"":24.0}",25;270;425;575,0.144
+bee_waggle_6,MicroWatch(idx=6),"{""new_dist_buffer_size"":33.0,""batch_size"":4.0,""threshold_ratio"":1.666112771,""max_dist_size"":17.0}",40;92;188;256;348,0.026
+bee_waggle_6,PELT,"penalty=100, jump=1, min_size=1",609,27.655
+bitcoin,MicroWatch(idx=0),"{""max_dist_size"":79.0,""new_dist_buffer_size"":13.0,""batch_size"":5.0,""threshold_ratio"":0.925766865}",,0.036
+bitcoin,MicroWatch(idx=1),"{""batch_size"":5.0,""threshold_ratio"":3.565927843,""max_dist_size"":17.0,""new_dist_buffer_size"":14.0}",15;85;520;545;570;585;600;625;705;750,0.040
+bitcoin,MicroWatch(idx=2),"{""max_dist_size"":52.0,""batch_size"":6.0,""threshold_ratio"":2.835249497,""new_dist_buffer_size"":28.0}",90;516;582,0.033
+bitcoin,MicroWatch(idx=3),"{""threshold_ratio"":2.163913651,""max_dist_size"":46.0,""new_dist_buffer_size"":10.0,""batch_size"":3.0}",12;90;519;546,0.049
+bitcoin,MicroWatch(idx=4),"{""batch_size"":4.0,""new_dist_buffer_size"":21.0,""threshold_ratio"":2.373581048,""max_dist_size"":40.0}",88;520;544;580;704;748,0.055
+bitcoin,MicroWatch(idx=5),"{""batch_size"":5.0,""threshold_ratio"":2.212551814,""new_dist_buffer_size"":30.0,""max_dist_size"":24.0}",85;510;545;580,0.049
+bitcoin,MicroWatch(idx=6),"{""max_dist_size"":33.0,""batch_size"":4.0,""threshold_ratio"":1.209374623,""new_dist_buffer_size"":43.0}",84;492;544;588;708;756,0.031
+bitcoin,BOCPD,"alpha=0.001, beta=0.001, kappa=2, mu=5",,19.320
+bitcoin,CUSUM,"twarmup=290, plimit=0.6657471216052517",71;115;196;233;334;394;465;510;549;584;627;681;723;760,0.012
+bitcoin,PELT,"penalty=6, jump=8, min_size=1",452;519;546;568;587;600;619;649;703;747;760;774,51.416
+brent_spot,MicroWatch(idx=0),"{""batch_size"":3.0,""new_dist_buffer_size"":31.0,""threshold_ratio"":1.040997484,""max_dist_size"":92.0}",,0.042
+brent_spot,MicroWatch(idx=1),"{""threshold_ratio"":3.90884706,""batch_size"":5.0,""new_dist_buffer_size"":7.0,""max_dist_size"":96.0}",45;215;225;240;250;280;375,0.079
+brent_spot,MicroWatch(idx=2),"{""threshold_ratio"":3.92701899,""batch_size"":3.0,""max_dist_size"":19.0,""new_dist_buffer_size"":10.0}",132;201,0.021
+brent_spot,MicroWatch(idx=3),"{""new_dist_buffer_size"":11.0,""max_dist_size"":26.0,""batch_size"":4.0,""threshold_ratio"":3.63913105}",132;200,0.021
+brent_spot,MicroWatch(idx=4),"{""threshold_ratio"":0.897043169,""max_dist_size"":59.0,""batch_size"":4.0,""new_dist_buffer_size"":49.0}",112;168;228;284;372,0.044
+brent_spot,MicroWatch(idx=5),"{""max_dist_size"":22.0,""new_dist_buffer_size"":31.0,""batch_size"":5.0,""threshold_ratio"":0.179403432}",75;110;145;185;220;255;290;330;365,0.029
+brent_spot,MicroWatch(idx=6),"{""max_dist_size"":47.0,""new_dist_buffer_size"":36.0,""batch_size"":4.0,""threshold_ratio"":1.070024322}",44;108;144;192;228;280;372,0.031
+brent_spot,BOCPD,"alpha=0.001, beta=10, kappa=0.1, mu=10",220;221;222,8.085
+brent_spot,CUSUM,"twarmup=45, plimit=0.5286127329037958",48;96;136;194;230;277;381;466,0.009
+brent_spot,PELT,"penalty=8, jump=7, min_size=1",132;200;225;240;280;378;453;500,22.767
+businv,MicroWatch(idx=0),"{""batch_size"":4.0,""new_dist_buffer_size"":6.0,""threshold_ratio"":0.754350032,""max_dist_size"":92.0}",,0.030
+businv,MicroWatch(idx=1),"{""max_dist_size"":50.0,""batch_size"":4.0,""new_dist_buffer_size"":15.0,""threshold_ratio"":2.464046487}",96;120;192;208;224,0.038
+businv,MicroWatch(idx=2),"{""threshold_ratio"":3.799072007,""max_dist_size"":98.0,""new_dist_buffer_size"":30.0,""batch_size"":4.0}",248,0.034
+businv,MicroWatch(idx=3),"{""batch_size"":3.0,""max_dist_size"":89.0,""threshold_ratio"":3.866389247,""new_dist_buffer_size"":33.0}",249,0.046
+businv,MicroWatch(idx=4),"{""threshold_ratio"":3.879569139,""max_dist_size"":66.0,""batch_size"":4.0,""new_dist_buffer_size"":18.0}",100;188;208,0.056
+businv,MicroWatch(idx=5),"{""new_dist_buffer_size"":34.0,""threshold_ratio"":3.073015156,""max_dist_size"":100.0,""batch_size"":3.0}",189,0.078
+businv,MicroWatch(idx=6),"{""new_dist_buffer_size"":21.0,""threshold_ratio"":1.16976017,""max_dist_size"":45.0,""batch_size"":3.0}",21;45;69;93;120;141;165;189;210;231;261;285;306,0.026
+businv,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,3.970
+businv,CUSUM,"twarmup=208, plimit=0.7374587220159847",35;73;110;152;190;242;281;318,0.004
+businv,PELT,"penalty=100, jump=1, min_size=1",330,7.710
+centralia,MicroWatch(idx=0),"{""max_dist_size"":23.0,""threshold_ratio"":3.702761017,""new_dist_buffer_size"":12.0,""batch_size"":3.0}",,0.005
+centralia,MicroWatch(idx=1),"{""batch_size"":6.0,""threshold_ratio"":2.504126059,""max_dist_size"":36.0,""new_dist_buffer_size"":12.0}",12,0.004
+centralia,MicroWatch(idx=2),"{""max_dist_size"":75.0,""batch_size"":4.0,""threshold_ratio"":0.669825711,""new_dist_buffer_size"":11.0}",12,0.002
+centralia,MicroWatch(idx=3),"{""max_dist_size"":42.0,""batch_size"":6.0,""threshold_ratio"":0.460242184,""new_dist_buffer_size"":7.0}",12,0.002
+centralia,MicroWatch(idx=4),"{""batch_size"":6.0,""threshold_ratio"":0.447929601,""new_dist_buffer_size"":10.0,""max_dist_size"":15.0}",12,0.002
+centralia,MicroWatch(idx=5),"{""batch_size"":3.0,""max_dist_size"":82.0,""new_dist_buffer_size"":3.0,""threshold_ratio"":1.744701207}",3,0.005
+centralia,MicroWatch(idx=6),"{""max_dist_size"":57.0,""new_dist_buffer_size"":48.0,""threshold_ratio"":2.747649263,""batch_size"":4.0}",,0.001
+centralia,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,0.012
+centralia,CUSUM,"twarmup=11, plimit=0.5221963846740868",,0.001
+centralia,PELT,"penalty=1, jump=6, min_size=1",9;15,0.016
+children_per_woman,MicroWatch(idx=0),"{""new_dist_buffer_size"":32.0,""threshold_ratio"":0.974587839,""batch_size"":3.0,""max_dist_size"":41.0}",,0.015
+children_per_woman,MicroWatch(idx=1),"{""new_dist_buffer_size"":10.0,""threshold_ratio"":3.123224082,""max_dist_size"":97.0,""batch_size"":4.0}",116;132;144;176,0.053
+children_per_woman,MicroWatch(idx=2),"{""batch_size"":6.0,""max_dist_size"":96.0,""threshold_ratio"":3.981074313,""new_dist_buffer_size"":17.0}",114,0.029
+children_per_woman,MicroWatch(idx=3),"{""threshold_ratio"":2.227882663,""new_dist_buffer_size"":6.0,""max_dist_size"":92.0,""batch_size"":5.0}",110;175;190,0.045
+children_per_woman,MicroWatch(idx=4),"{""batch_size"":3.0,""max_dist_size"":100.0,""new_dist_buffer_size"":26.0,""threshold_ratio"":3.778902626}",111;174,0.112
+children_per_woman,MicroWatch(idx=5),"{""threshold_ratio"":1.298459232,""max_dist_size"":91.0,""batch_size"":5.0,""new_dist_buffer_size"":25.0}",,0.027
+children_per_woman,MicroWatch(idx=6),"{""batch_size"":5.0,""new_dist_buffer_size"":31.0,""max_dist_size"":93.0,""threshold_ratio"":2.396303304}",110;175,0.035
+children_per_woman,BOCPD,"alpha=0.1, beta=0.001, kappa=5, mu=5",110;147;167;168,2.933
+children_per_woman,CUSUM,"twarmup=150, plimit=0.2550581439882834",35;72;108;146;181;223;262;300,0.003
+children_per_woman,PELT,"penalty=30, jump=8, min_size=1",178;301,5.822
+co2_canada,MicroWatch(idx=0),"{""max_dist_size"":95.0,""threshold_ratio"":0.113099147,""batch_size"":6.0,""new_dist_buffer_size"":50.0}",54,0.019
+co2_canada,MicroWatch(idx=1),"{""max_dist_size"":50.0,""batch_size"":6.0,""threshold_ratio"":2.538112513,""new_dist_buffer_size"":24.0}",48;84;108;144;168,0.028
+co2_canada,MicroWatch(idx=2),"{""max_dist_size"":17.0,""threshold_ratio"":0.798278153,""batch_size"":3.0,""new_dist_buffer_size"":21.0}",21;42;63;84;105;141;162,0.015
+co2_canada,MicroWatch(idx=3),"{""batch_size"":5.0,""threshold_ratio"":1.657277825,""max_dist_size"":34.0,""new_dist_buffer_size"":23.0}",25;50;80;105;165,0.015
+co2_canada,MicroWatch(idx=4),"{""threshold_ratio"":2.481809356,""max_dist_size"":34.0,""batch_size"":3.0,""new_dist_buffer_size"":18.0}",45;63;81;102;168,0.033
+co2_canada,MicroWatch(idx=5),"{""new_dist_buffer_size"":13.0,""threshold_ratio"":3.86340126,""max_dist_size"":22.0,""batch_size"":6.0}",42;60;78;102;168,0.048
+co2_canada,MicroWatch(idx=6),"{""max_dist_size"":55.0,""batch_size"":3.0,""threshold_ratio"":1.228752196,""new_dist_buffer_size"":31.0}",45;78;111;168,0.026
+co2_canada,BOCPD,"alpha=0.001, beta=0.1, kappa=0.1, mu=10",75;137;159;160,1.487
+co2_canada,CUSUM,"twarmup=11, plimit=0.4156816681234061",36;72;107;148;192,0.003
+co2_canada,PELT,"penalty=1, jump=5, min_size=1",83;105;141;168;215,3.549
+construction,MicroWatch(idx=0),"{""batch_size"":3.0,""new_dist_buffer_size"":50.0,""threshold_ratio"":1.015073093,""max_dist_size"":95.0}",,0.035
+construction,MicroWatch(idx=1),"{""threshold_ratio"":1.533464784,""new_dist_buffer_size"":22.0,""batch_size"":3.0,""max_dist_size"":94.0}",138;192;216,0.079
+construction,MicroWatch(idx=2),"{""max_dist_size"":68.0,""new_dist_buffer_size"":9.0,""batch_size"":3.0,""threshold_ratio"":2.455072035}",138,0.038
+construction,MicroWatch(idx=3),"{""max_dist_size"":96.0,""new_dist_buffer_size"":24.0,""batch_size"":4.0,""threshold_ratio"":1.496698675}",136;192;216,0.050
+construction,MicroWatch(idx=4),"{""threshold_ratio"":2.287514894,""new_dist_buffer_size"":9.0,""batch_size"":3.0,""max_dist_size"":82.0}",138;192;201;216,0.102
+construction,MicroWatch(idx=5),"{""batch_size"":3.0,""threshold_ratio"":3.98118336,""new_dist_buffer_size"":33.0,""max_dist_size"":58.0}",138,0.038
+construction,MicroWatch(idx=6),"{""max_dist_size"":59.0,""threshold_ratio"":1.142752364,""batch_size"":6.0,""new_dist_buffer_size"":7.0}",18;42;54;66;78;126;138;150;168;180;192;204;216;234;246;258;270;282,0.030
+construction,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",186,3.351
+construction,CUSUM,"twarmup=192, plimit=0.11300151685656862",44;87;139;194;248;286,0.005
+construction,PELT,"penalty=100, jump=1, min_size=1",319,7.360
+debt_ireland,MicroWatch(idx=0),"{""max_dist_size"":43.0,""threshold_ratio"":2.308089181,""batch_size"":4.0,""new_dist_buffer_size"":8.0}",,0.005
+debt_ireland,MicroWatch(idx=1),"{""batch_size"":4.0,""new_dist_buffer_size"":6.0,""max_dist_size"":73.0,""threshold_ratio"":1.003072838}",8;16,0.003
+debt_ireland,MicroWatch(idx=2),"{""new_dist_buffer_size"":7.0,""threshold_ratio"":0.343588055,""batch_size"":4.0,""max_dist_size"":66.0}",8;16,0.002
+debt_ireland,MicroWatch(idx=3),"{""new_dist_buffer_size"":6.0,""threshold_ratio"":0.349538173,""max_dist_size"":98.0,""batch_size"":4.0}",8;16,0.002
+debt_ireland,MicroWatch(idx=4),"{""new_dist_buffer_size"":7.0,""max_dist_size"":43.0,""threshold_ratio"":0.379662771,""batch_size"":4.0}",8;16,0.002
+debt_ireland,MicroWatch(idx=5),"{""batch_size"":4.0,""new_dist_buffer_size"":5.0,""max_dist_size"":24.0,""threshold_ratio"":0.606375202}",8,0.003
+debt_ireland,MicroWatch(idx=6),"{""max_dist_size"":78.0,""threshold_ratio"":0.200590793,""batch_size"":4.0,""new_dist_buffer_size"":6.0}",8;16,0.030
+debt_ireland,BOCPD,"alpha=0.2, beta=1, kappa=0.5, mu=100",5;10,0.019
+debt_ireland,CUSUM,"twarmup=10, plimit=0.09163313697045995",,0.001
+debt_ireland,PELT,"penalty=0.0000000001, jump=2, min_size=6",6;12;18;21,0.018
+gdp_argentina,MicroWatch(idx=0),"{""threshold_ratio"":1.383563304,""max_dist_size"":29.0,""new_dist_buffer_size"":49.0,""batch_size"":6.0}",,0.006
+gdp_argentina,MicroWatch(idx=1),"{""max_dist_size"":47.0,""threshold_ratio"":2.528171061,""batch_size"":6.0,""new_dist_buffer_size"":39.0}",54,0.006
+gdp_argentina,MicroWatch(idx=2),"{""max_dist_size"":11.0,""threshold_ratio"":0.421631137,""batch_size"":6.0,""new_dist_buffer_size"":50.0}",54,0.004
+gdp_argentina,MicroWatch(idx=3),"{""new_dist_buffer_size"":24.0,""batch_size"":4.0,""max_dist_size"":36.0,""threshold_ratio"":3.212672125}",,0.004
+gdp_argentina,MicroWatch(idx=4),"{""batch_size"":6.0,""new_dist_buffer_size"":50.0,""max_dist_size"":66.0,""threshold_ratio"":0.101362542}",54,0.005
+gdp_argentina,MicroWatch(idx=5),"{""batch_size"":4.0,""threshold_ratio"":2.635986227,""max_dist_size"":29.0,""new_dist_buffer_size"":37.0}",52,0.004
+gdp_argentina,MicroWatch(idx=6),"{""batch_size"":6.0,""threshold_ratio"":0.437254121,""max_dist_size"":53.0,""new_dist_buffer_size"":49.0}",54,0.004
+gdp_argentina,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,0.117
+gdp_argentina,CUSUM,"twarmup=26, plimit=0.42256978071605383",37,0.001
+gdp_argentina,PELT,"penalty=6, jump=7, min_size=1",33;47;59,0.214
+gdp_croatia,MicroWatch(idx=0),"{""max_dist_size"":16.0,""batch_size"":3.0,""new_dist_buffer_size"":15.0,""threshold_ratio"":1.567934133}",,0.004
+gdp_croatia,MicroWatch(idx=1),"{""batch_size"":5.0,""threshold_ratio"":0.453796633,""new_dist_buffer_size"":12.0,""max_dist_size"":34.0}",15,0.005
+gdp_croatia,MicroWatch(idx=2),"{""max_dist_size"":14.0,""threshold_ratio"":0.106121015,""new_dist_buffer_size"":12.0,""batch_size"":5.0}",15,0.005
+gdp_croatia,MicroWatch(idx=3),"{""new_dist_buffer_size"":14.0,""threshold_ratio"":0.514370928,""batch_size"":3.0,""max_dist_size"":60.0}",15,0.003
+gdp_croatia,MicroWatch(idx=4),"{""max_dist_size"":90.0,""threshold_ratio"":0.14635912,""new_dist_buffer_size"":15.0,""batch_size"":5.0}",15,0.003
+gdp_croatia,MicroWatch(idx=5),"{""batch_size"":5.0,""threshold_ratio"":0.228700741,""max_dist_size"":77.0,""new_dist_buffer_size"":12.0}",15,0.002
+gdp_croatia,MicroWatch(idx=6),"{""threshold_ratio"":0.12625164,""new_dist_buffer_size"":15.0,""max_dist_size"":89.0,""batch_size"":3.0}",15,0.002
+gdp_croatia,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,0.022
+gdp_croatia,CUSUM,"twarmup=12, plimit=0.7806290248284016",,0.001
+gdp_croatia,PELT,"penalty=0.0000000001, jump=7, min_size=8",8;16;24,0.020
+gdp_iran,MicroWatch(idx=0),"{""threshold_ratio"":3.841691761,""batch_size"":3.0,""max_dist_size"":79.0,""new_dist_buffer_size"":16.0}",,0.014
+gdp_iran,MicroWatch(idx=1),"{""max_dist_size"":72.0,""batch_size"":4.0,""new_dist_buffer_size"":12.0,""threshold_ratio"":2.506969039}",12,0.009
+gdp_iran,MicroWatch(idx=2),"{""max_dist_size"":65.0,""threshold_ratio"":0.711837867,""new_dist_buffer_size"":11.0,""batch_size"":3.0}",12;24;36;48,0.005
+gdp_iran,MicroWatch(idx=3),"{""new_dist_buffer_size"":10.0,""max_dist_size"":88.0,""batch_size"":6.0,""threshold_ratio"":2.652584452}",12,0.007
+gdp_iran,MicroWatch(idx=4),"{""batch_size"":4.0,""threshold_ratio"":3.990815549,""new_dist_buffer_size"":10.0,""max_dist_size"":70.0}",12,0.012
+gdp_iran,MicroWatch(idx=5),"{""max_dist_size"":56.0,""batch_size"":6.0,""new_dist_buffer_size"":8.0,""threshold_ratio"":3.799172549}",12,0.008
+gdp_iran,MicroWatch(idx=6),"{""new_dist_buffer_size"":12.0,""batch_size"":6.0,""threshold_ratio"":1.038922356,""max_dist_size"":33.0}",12;24;36;48,0.004
+gdp_iran,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,0.118
+gdp_iran,CUSUM,"twarmup=11, plimit=0.5941666227501861",44,0.001
+gdp_iran,PELT,"penalty=1, jump=4, min_size=5",10;20;30;40;45;58,0.091
+gdp_japan,MicroWatch(idx=0),"{""new_dist_buffer_size"":31.0,""threshold_ratio"":3.698176381,""batch_size"":4.0,""max_dist_size"":16.0}",,0.005
+gdp_japan,MicroWatch(idx=1),"{""max_dist_size"":39.0,""new_dist_buffer_size"":31.0,""threshold_ratio"":0.639995569,""batch_size"":4.0}",32,0.004
+gdp_japan,MicroWatch(idx=2),"{""threshold_ratio"":0.435226802,""new_dist_buffer_size"":27.0,""batch_size"":4.0,""max_dist_size"":10.0}",28,0.004
+gdp_japan,MicroWatch(idx=3),"{""max_dist_size"":62.0,""batch_size"":4.0,""threshold_ratio"":0.327203503,""new_dist_buffer_size"":31.0}",32,0.003
+gdp_japan,MicroWatch(idx=4),"{""max_dist_size"":71.0,""batch_size"":4.0,""threshold_ratio"":0.774503652,""new_dist_buffer_size"":31.0}",32,0.004
+gdp_japan,MicroWatch(idx=5),"{""new_dist_buffer_size"":28.0,""batch_size"":4.0,""max_dist_size"":23.0,""threshold_ratio"":1.60131655}",28,0.004
+gdp_japan,MicroWatch(idx=6),"{""batch_size"":4.0,""new_dist_buffer_size"":32.0,""max_dist_size"":35.0,""threshold_ratio"":0.258077262}",32,0.003
+gdp_japan,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,0.117
+gdp_japan,CUSUM,"twarmup=31, plimit=0.3619946239177961",36,0.001
+gdp_japan,PELT,"penalty=20, jump=1, min_size=1",58,0.241
+global_co2,MicroWatch(idx=0),"{""batch_size"":5.0,""threshold_ratio"":2.684057905,""max_dist_size"":77.0,""new_dist_buffer_size"":43.0}",,0.012
+global_co2,MicroWatch(idx=1),"{""batch_size"":5.0,""new_dist_buffer_size"":48.0,""max_dist_size"":78.0,""threshold_ratio"":2.926155975}",95,0.012
+global_co2,MicroWatch(idx=2),"{""batch_size"":5.0,""new_dist_buffer_size"":48.0,""threshold_ratio"":3.430039325,""max_dist_size"":88.0}",,0.011
+global_co2,MicroWatch(idx=3),"{""threshold_ratio"":3.999326564,""new_dist_buffer_size"":39.0,""max_dist_size"":73.0,""batch_size"":5.0}",95,0.011
+global_co2,MicroWatch(idx=4),"{""max_dist_size"":93.0,""new_dist_buffer_size"":47.0,""threshold_ratio"":2.822924395,""batch_size"":5.0}",95,0.020
+global_co2,MicroWatch(idx=5),"{""threshold_ratio"":3.563115209,""batch_size"":5.0,""max_dist_size"":78.0,""new_dist_buffer_size"":21.0}",95,0.016
+global_co2,MicroWatch(idx=6),"{""batch_size"":5.0,""max_dist_size"":26.0,""threshold_ratio"":3.323671819,""new_dist_buffer_size"":48.0}",65,0.008
+global_co2,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,0.365
+global_co2,CUSUM,"twarmup=47, plimit=0.09000398187665967",46;81,0.002
+global_co2,PELT,"penalty=30, jump=1, min_size=1",104,0.731
+homeruns,MicroWatch(idx=0),"{""max_dist_size"":91.0,""new_dist_buffer_size"":15.0,""batch_size"":3.0,""threshold_ratio"":1.086319539}",,0.030
+homeruns,MicroWatch(idx=1),"{""max_dist_size"":55.0,""batch_size"":3.0,""threshold_ratio"":2.033442239,""new_dist_buffer_size"":18.0}",18;60,0.021
+homeruns,MicroWatch(idx=2),"{""threshold_ratio"":3.058227426,""max_dist_size"":25.0,""new_dist_buffer_size"":15.0,""batch_size"":6.0}",18;60,0.008
+homeruns,MicroWatch(idx=3),"{""batch_size"":6.0,""threshold_ratio"":3.117818813,""new_dist_buffer_size"":5.0,""max_dist_size"":34.0}",18;78,0.010
+homeruns,MicroWatch(idx=4),"{""threshold_ratio"":3.895291224,""batch_size"":3.0,""max_dist_size"":34.0,""new_dist_buffer_size"":4.0}",18;60;66,0.024
+homeruns,MicroWatch(idx=5),"{""new_dist_buffer_size"":17.0,""batch_size"":3.0,""max_dist_size"":29.0,""threshold_ratio"":3.129749874}",18;60,0.012
+homeruns,MicroWatch(idx=6),"{""threshold_ratio"":1.395013398,""new_dist_buffer_size"":16.0,""max_dist_size"":13.0,""batch_size"":6.0}",18;36;54;78;96;114,0.008
+homeruns,BOCPD,"alpha=0.1, beta=0.5, kappa=0.1, mu=200",13;14;55,0.451
+homeruns,CUSUM,"twarmup=65, plimit=0.7397611932092609",36;77,0.001
+homeruns,PELT,"penalty=20, jump=1, min_size=1",60;118,1.047
+iceland_tourism,MicroWatch(idx=0),"{""threshold_ratio"":0.209210564,""batch_size"":5.0,""max_dist_size"":52.0,""new_dist_buffer_size"":23.0}",,0.015
+iceland_tourism,MicroWatch(idx=1),"{""new_dist_buffer_size"":18.0,""max_dist_size"":25.0,""threshold_ratio"":3.793166529,""batch_size"":5.0}",135;170,0.013
+iceland_tourism,MicroWatch(idx=2),"{""max_dist_size"":92.0,""batch_size"":5.0,""new_dist_buffer_size"":37.0,""threshold_ratio"":3.658406186}",160,0.019
+iceland_tourism,MicroWatch(idx=3),"{""batch_size"":3.0,""new_dist_buffer_size"":33.0,""threshold_ratio"":3.498780655,""max_dist_size"":95.0}",174,0.032
+iceland_tourism,MicroWatch(idx=4),"{""threshold_ratio"":2.641971007,""batch_size"":3.0,""max_dist_size"":81.0,""new_dist_buffer_size"":13.0}",138;162,0.050
+iceland_tourism,MicroWatch(idx=5),"{""batch_size"":3.0,""threshold_ratio"":3.865322614,""new_dist_buffer_size"":24.0,""max_dist_size"":76.0}",150,0.040
+iceland_tourism,MicroWatch(idx=6),"{""new_dist_buffer_size"":11.0,""threshold_ratio"":1.569453357,""batch_size"":5.0,""max_dist_size"":99.0}",125;160;185,0.025
+iceland_tourism,BOCPD,"alpha=0.001, beta=0.001, kappa=0.5, mu=0",,1.274
+iceland_tourism,CUSUM,"twarmup=170, plimit=0.0014262970885022819",66;127;165,0.004
+iceland_tourism,PELT,"penalty=100, jump=1, min_size=1",199,2.721
+jfk_passengers,MicroWatch(idx=0),"{""new_dist_buffer_size"":3.0,""threshold_ratio"":0.442342413,""batch_size"":3.0,""max_dist_size"":25.0}",,0.023
+jfk_passengers,MicroWatch(idx=1),"{""threshold_ratio"":3.04901229,""new_dist_buffer_size"":35.0,""batch_size"":6.0,""max_dist_size"":85.0}",330,0.036
+jfk_passengers,MicroWatch(idx=2),"{""max_dist_size"":15.0,""batch_size"":4.0,""threshold_ratio"":2.736206023,""new_dist_buffer_size"":40.0}",364,0.015
+jfk_passengers,MicroWatch(idx=3),"{""new_dist_buffer_size"":45.0,""threshold_ratio"":2.192570456,""max_dist_size"":28.0,""batch_size"":4.0}",340,0.016
+jfk_passengers,MicroWatch(idx=4),"{""batch_size"":4.0,""new_dist_buffer_size"":40.0,""threshold_ratio"":3.51548693,""max_dist_size"":51.0}",328,0.030
+jfk_passengers,MicroWatch(idx=5),"{""max_dist_size"":34.0,""new_dist_buffer_size"":46.0,""batch_size"":4.0,""threshold_ratio"":2.194242833}",328;460,0.020
+jfk_passengers,MicroWatch(idx=6),"{""batch_size"":4.0,""max_dist_size"":51.0,""new_dist_buffer_size"":46.0,""threshold_ratio"":1.058336283}",76;124;328;376;424,0.022
+jfk_passengers,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,7.443
+jfk_passengers,CUSUM,"twarmup=297, plimit=0.7280877609132768",54;138;331;369;439,0.013
+jfk_passengers,PELT,"penalty=20, jump=9, min_size=1",329;468,15.793
+lga_passengers,MicroWatch(idx=0),"{""max_dist_size"":31.0,""batch_size"":3.0,""threshold_ratio"":1.671622601,""new_dist_buffer_size"":42.0}",,0.019
+lga_passengers,MicroWatch(idx=1),"{""threshold_ratio"":2.252130654,""batch_size"":3.0,""max_dist_size"":94.0,""new_dist_buffer_size"":4.0}",15;123;129;168;294,0.112
+lga_passengers,MicroWatch(idx=2),"{""max_dist_size"":50.0,""threshold_ratio"":2.718915871,""batch_size"":4.0,""new_dist_buffer_size"":4.0}",280;296,0.026
+lga_passengers,MicroWatch(idx=3),"{""new_dist_buffer_size"":6.0,""threshold_ratio"":1.81270736,""batch_size"":3.0,""max_dist_size"":88.0}",339;348;384,0.062
+lga_passengers,MicroWatch(idx=4),"{""max_dist_size"":55.0,""batch_size"":4.0,""threshold_ratio"":2.971644565,""new_dist_buffer_size"":3.0}",124;132;168;272;296,0.067
+lga_passengers,MicroWatch(idx=5),"{""max_dist_size"":17.0,""new_dist_buffer_size"":31.0,""batch_size"":4.0,""threshold_ratio"":1.264276913}",88;124;280;340;436,0.023
+lga_passengers,MicroWatch(idx=6),"{""max_dist_size"":21.0,""new_dist_buffer_size"":11.0,""threshold_ratio"":1.042967553,""batch_size"":3.0}",12;27;48;87;123;144;165;186;243;273;294;447,0.034
+lga_passengers,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,6.921
+lga_passengers,CUSUM,"twarmup=294, plimit=0.571143058904489",58;101;194;261;303;347;394;441,0.008
+lga_passengers,PELT,"penalty=7, jump=8, min_size=1",14;110;164;254;423;468,17.201
+measles,MicroWatch(idx=0),"{""new_dist_buffer_size"":49.0,""batch_size"":3.0,""threshold_ratio"":0.413195058,""max_dist_size"":62.0}",,0.041
+measles,MicroWatch(idx=1),"{""new_dist_buffer_size"":37.0,""max_dist_size"":87.0,""batch_size"":4.0,""threshold_ratio"":3.998925562}",,0.047
+measles,MicroWatch(idx=2),"{""new_dist_buffer_size"":22.0,""threshold_ratio"":3.44513407,""batch_size"":3.0,""max_dist_size"":89.0}",,0.049
+measles,MicroWatch(idx=3),"{""max_dist_size"":88.0,""threshold_ratio"":3.769623797,""new_dist_buffer_size"":8.0,""batch_size"":6.0}",,0.042
+measles,MicroWatch(idx=4),"{""batch_size"":4.0,""new_dist_buffer_size"":35.0,""max_dist_size"":85.0,""threshold_ratio"":3.643604134}",,0.061
+measles,MicroWatch(idx=5),"{""batch_size"":5.0,""max_dist_size"":94.0,""threshold_ratio"":3.65312537,""new_dist_buffer_size"":7.0}",685,0.075
+measles,MicroWatch(idx=6),"{""batch_size"":4.0,""threshold_ratio"":3.819045087,""max_dist_size"":79.0,""new_dist_buffer_size"":44.0}",,0.035
+measles,BOCPD,"alpha=0.001, beta=0.001, kappa=5, mu=0",,30.967
+measles,CUSUM,"twarmup=143, plimit=0.05171962787404024",38;84;119;155;193;236;311;359;403;444;478;520;574;611;653;687;731;774;816;861;896;945;988,0.025
+measles,PELT,"penalty=20, jump=1, min_size=1",991,84.735
+nile,MicroWatch(idx=0),"{""new_dist_buffer_size"":21.0,""batch_size"":4.0,""threshold_ratio"":0.998558568,""max_dist_size"":45.0}",,0.021
+nile,MicroWatch(idx=1),"{""new_dist_buffer_size"":16.0,""batch_size"":4.0,""threshold_ratio"":2.044955484,""max_dist_size"":26.0}",28,0.015
+nile,MicroWatch(idx=2),"{""new_dist_buffer_size"":14.0,""threshold_ratio"":2.797278577,""max_dist_size"":64.0,""batch_size"":4.0}",,0.013
+nile,MicroWatch(idx=3),"{""threshold_ratio"":1.942739307,""batch_size"":4.0,""max_dist_size"":62.0,""new_dist_buffer_size"":27.0}",,0.012
+nile,MicroWatch(idx=4),"{""threshold_ratio"":3.265373245,""batch_size"":4.0,""new_dist_buffer_size"":10.0,""max_dist_size"":89.0}",28,0.027
+nile,MicroWatch(idx=5),"{""batch_size"":3.0,""max_dist_size"":26.0,""threshold_ratio"":0.262743378,""new_dist_buffer_size"":23.0}",24,0.008
+nile,MicroWatch(idx=6),"{""batch_size"":4.0,""threshold_ratio"":1.184525963,""max_dist_size"":40.0,""new_dist_buffer_size"":25.0}",28,0.007
+nile,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,0.339
+nile,CUSUM,"twarmup=121, plimit=0.1323502965647935",41,0.002
+nile,PELT,"penalty=1, jump=2, min_size=9",27;100,0.222
+occupancy,MicroWatch(idx=0),"{""batch_size"":3.0,""threshold_ratio"":1.016785537,""max_dist_size"":56.0,""new_dist_buffer_size"":45.0}",,0.029
+occupancy,MicroWatch(idx=1),"{""batch_size"":6.0,""max_dist_size"":13.0,""new_dist_buffer_size"":14.0,""threshold_ratio"":1.656564064}",30;54;96;144;186;234;270;324;342;360;420;438;456,0.033
+occupancy,MicroWatch(idx=2),"{""new_dist_buffer_size"":47.0,""batch_size"":3.0,""threshold_ratio"":0.925715672,""max_dist_size"":72.0}",51;99;147;195;243;417;465,0.045
+occupancy,MicroWatch(idx=3),"{""threshold_ratio"":0.930468737,""new_dist_buffer_size"":39.0,""max_dist_size"":79.0,""batch_size"":3.0}",51;90;141;180;240;279;324;363;414;459;504,0.076
+occupancy,MicroWatch(idx=4),"{""max_dist_size"":51.0,""batch_size"":3.0,""new_dist_buffer_size"":41.0,""threshold_ratio"":1.458138}",51;93;141;183;234;417,0.101
+occupancy,MicroWatch(idx=5),"{""max_dist_size"":59.0,""new_dist_buffer_size"":29.0,""threshold_ratio"":0.171617444,""batch_size"":4.0}",52;84;140;172;240;340;416;448,0.131
+occupancy,MicroWatch(idx=6),"{""batch_size"":4.0,""new_dist_buffer_size"":22.0,""max_dist_size"":44.0,""threshold_ratio"":1.220855472}",52;92;140;184;236;260;336;416;464;504,0.069
+occupancy,PELT,"penalty=5, jump=9, min_size=1",12;58;92;104;149;185;241;264;288;341;353;419;456;509,24.270
+ozone,MicroWatch(idx=0),"{""new_dist_buffer_size"":27.0,""max_dist_size"":12.0,""threshold_ratio"":3.732766093,""batch_size"":4.0}",,0.005
+ozone,MicroWatch(idx=1),"{""batch_size"":4.0,""max_dist_size"":96.0,""new_dist_buffer_size"":26.0,""threshold_ratio"":0.370735106}",28,0.006
+ozone,MicroWatch(idx=2),"{""threshold_ratio"":0.103845245,""max_dist_size"":16.0,""batch_size"":4.0,""new_dist_buffer_size"":25.0}",28,0.006
+ozone,MicroWatch(idx=3),"{""new_dist_buffer_size"":25.0,""batch_size"":4.0,""max_dist_size"":66.0,""threshold_ratio"":0.596939605}",28,0.004
+ozone,MicroWatch(idx=4),"{""max_dist_size"":71.0,""batch_size"":4.0,""threshold_ratio"":0.255549556,""new_dist_buffer_size"":27.0}",28,0.004
+ozone,MicroWatch(idx=5),"{""batch_size"":4.0,""threshold_ratio"":0.686264876,""max_dist_size"":70.0,""new_dist_buffer_size"":25.0}",28,0.004
+ozone,MicroWatch(idx=6),"{""threshold_ratio"":0.103902241,""new_dist_buffer_size"":25.0,""max_dist_size"":57.0,""batch_size"":4.0}",28,0.003
+ozone,BOCPD,"alpha=0.1, beta=10, kappa=0.1, mu=0",29,0.107
+ozone,CUSUM,"twarmup=219, plimit=0.6980735635352994",49,0.002
+ozone,PELT,"penalty=0.0000000001, jump=8, min_size=9",9;18;27;36;45;54,0.068
+quality_control_1,MicroWatch(idx=0),"{""threshold_ratio"":0.955002515,""batch_size"":6.0,""new_dist_buffer_size"":33.0,""max_dist_size"":10.0}",312,0.013
+quality_control_1,MicroWatch(idx=1),"{""batch_size"":6.0,""threshold_ratio"":3.497463148,""max_dist_size"":62.0,""new_dist_buffer_size"":43.0}",144,0.019
+quality_control_1,MicroWatch(idx=2),"{""batch_size"":3.0,""threshold_ratio"":0.165061772,""max_dist_size"":89.0,""new_dist_buffer_size"":26.0}",27;54;81;108;135;162;189;216;243;270;297,0.018
+quality_control_1,MicroWatch(idx=3),"{""new_dist_buffer_size"":39.0,""batch_size"":6.0,""threshold_ratio"":1.768767217,""max_dist_size"":49.0}",102,0.015
+quality_control_1,MicroWatch(idx=4),"{""max_dist_size"":94.0,""new_dist_buffer_size"":20.0,""batch_size"":5.0,""threshold_ratio"":2.082744893}",145,0.060
+quality_control_1,MicroWatch(idx=5),"{""threshold_ratio"":3.822143826,""new_dist_buffer_size"":25.0,""max_dist_size"":15.0,""batch_size"":3.0}",144;279,0.015
+quality_control_1,MicroWatch(idx=6),"{""batch_size"":6.0,""threshold_ratio"":1.294981196,""new_dist_buffer_size"":50.0,""max_dist_size"":22.0}",108;180,0.013
+quality_control_1,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=5",141,3.481
+quality_control_1,CUSUM,"twarmup=92, plimit=0.14519033392336333",100;153;211;302,0.006
+quality_control_1,PELT,"penalty=5, jump=1, min_size=1",144;313,7.889
+quality_control_2,MicroWatch(idx=0),"{""threshold_ratio"":1.216461214,""max_dist_size"":56.0,""batch_size"":3.0,""new_dist_buffer_size"":10.0}",,0.026
+quality_control_2,MicroWatch(idx=1),"{""threshold_ratio"":1.866747083,""new_dist_buffer_size"":25.0,""max_dist_size"":32.0,""batch_size"":3.0}",99,0.016
+quality_control_2,MicroWatch(idx=2),"{""max_dist_size"":21.0,""threshold_ratio"":0.589834253,""new_dist_buffer_size"":41.0,""batch_size"":4.0}",44;88;132;176;220;264,0.017
+quality_control_2,MicroWatch(idx=3),"{""batch_size"":3.0,""new_dist_buffer_size"":33.0,""threshold_ratio"":2.10049255,""max_dist_size"":74.0}",,0.022
+quality_control_2,MicroWatch(idx=4),"{""threshold_ratio"":2.081736798,""new_dist_buffer_size"":12.0,""batch_size"":6.0,""max_dist_size"":29.0}",96,0.020
+quality_control_2,MicroWatch(idx=5),"{""new_dist_buffer_size"":35.0,""threshold_ratio"":1.919692992,""batch_size"":3.0,""max_dist_size"":13.0}",99,0.014
+quality_control_2,MicroWatch(idx=6),"{""threshold_ratio"":1.628314707,""max_dist_size"":33.0,""batch_size"":3.0,""new_dist_buffer_size"":12.0}",99,0.017
+quality_control_2,BOCPD,"alpha=0.1, beta=10, kappa=2, mu=2",93,2.647
+quality_control_2,CUSUM,"twarmup=168, plimit=0.8449208818280003",112,0.010
+quality_control_2,PELT,"penalty=2, jump=1, min_size=1",97;283,7.563
+quality_control_3,MicroWatch(idx=0),"{""threshold_ratio"":1.144203297,""max_dist_size"":81.0,""batch_size"":4.0,""new_dist_buffer_size"":19.0}",,0.027
+quality_control_3,MicroWatch(idx=1),"{""threshold_ratio"":3.923311963,""new_dist_buffer_size"":42.0,""max_dist_size"":70.0,""batch_size"":5.0}",180,0.027
+quality_control_3,MicroWatch(idx=2),"{""new_dist_buffer_size"":42.0,""batch_size"":3.0,""threshold_ratio"":2.838284952,""max_dist_size"":92.0}",,0.029
+quality_control_3,MicroWatch(idx=3),"{""batch_size"":5.0,""threshold_ratio"":3.840260141,""new_dist_buffer_size"":12.0,""max_dist_size"":14.0}",45,0.012
+quality_control_3,MicroWatch(idx=4),"{""threshold_ratio"":0.337627206,""max_dist_size"":86.0,""batch_size"":6.0,""new_dist_buffer_size"":28.0}",42;78;108;138;174;204;234;264;294;324;354,0.036
+quality_control_3,MicroWatch(idx=5),"{""threshold_ratio"":1.924426165,""max_dist_size"":27.0,""batch_size"":5.0,""new_dist_buffer_size"":22.0}",180,0.021
+quality_control_3,MicroWatch(idx=6),"{""threshold_ratio"":1.87217908,""max_dist_size"":11.0,""batch_size"":5.0,""new_dist_buffer_size"":23.0}",180;235,0.017
+quality_control_3,BOCPD,"alpha=10, beta=0.1, kappa=0.1, mu=5",176,4.272
+quality_control_3,CUSUM,"twarmup=163, plimit=0.23880586663413858",197,0.016
+quality_control_3,PELT,"penalty=4, jump=1, min_size=1",179;366,10.758
+quality_control_4,MicroWatch(idx=0),"{""new_dist_buffer_size"":35.0,""batch_size"":3.0,""max_dist_size"":71.0,""threshold_ratio"":0.238082666}",,0.033
+quality_control_4,MicroWatch(idx=1),"{""batch_size"":6.0,""max_dist_size"":63.0,""new_dist_buffer_size"":21.0,""threshold_ratio"":3.944112231}",,0.026
+quality_control_4,MicroWatch(idx=2),"{""max_dist_size"":36.0,""threshold_ratio"":2.201370347,""batch_size"":4.0,""new_dist_buffer_size"":25.0}",180,0.021
+quality_control_4,MicroWatch(idx=3),"{""batch_size"":4.0,""threshold_ratio"":3.107189201,""new_dist_buffer_size"":14.0,""max_dist_size"":47.0}",,0.023
+quality_control_4,MicroWatch(idx=4),"{""threshold_ratio"":2.181676865,""new_dist_buffer_size"":24.0,""max_dist_size"":35.0,""batch_size"":3.0}",162;240;312;342;471,0.051
+quality_control_4,MicroWatch(idx=5),"{""max_dist_size"":64.0,""batch_size"":3.0,""threshold_ratio"":3.948630022,""new_dist_buffer_size"":9.0}",,0.045
+quality_control_4,MicroWatch(idx=6),"{""threshold_ratio"":2.243177446,""batch_size"":4.0,""new_dist_buffer_size"":18.0,""max_dist_size"":21.0}",180;200;288;344;472,0.024
+quality_control_4,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,9.038
+quality_control_4,CUSUM,"twarmup=298, plimit=0.5958088530403688",66;161;207;293;354;476,0.011
+quality_control_4,PELT,"penalty=100, jump=1, min_size=1",500,18.639
+quality_control_5,MicroWatch(idx=0),"{""max_dist_size"":94.0,""threshold_ratio"":3.070915464,""batch_size"":3.0,""new_dist_buffer_size"":19.0}",,0.044
+quality_control_5,MicroWatch(idx=1),"{""new_dist_buffer_size"":3.0,""max_dist_size"":51.0,""threshold_ratio"":3.476919108,""batch_size"":6.0}",,0.019
+quality_control_5,MicroWatch(idx=2),"{""batch_size"":5.0,""max_dist_size"":99.0,""threshold_ratio"":3.318086926,""new_dist_buffer_size"":39.0}",,0.023
+quality_control_5,MicroWatch(idx=3),"{""batch_size"":5.0,""max_dist_size"":35.0,""threshold_ratio"":3.28483171,""new_dist_buffer_size"":17.0}",,0.013
+quality_control_5,MicroWatch(idx=4),"{""batch_size"":4.0,""max_dist_size"":31.0,""new_dist_buffer_size"":41.0,""threshold_ratio"":3.324567931}",,0.020
+quality_control_5,MicroWatch(idx=5),"{""batch_size"":4.0,""max_dist_size"":35.0,""threshold_ratio"":1.638863905,""new_dist_buffer_size"":27.0}",32,0.029
+quality_control_5,MicroWatch(idx=6),"{""batch_size"":5.0,""new_dist_buffer_size"":41.0,""threshold_ratio"":3.234011728,""max_dist_size"":24.0}",,0.013
+quality_control_5,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,3.530
+quality_control_5,CUSUM,"twarmup=64, plimit=0.4315550779804488",77,0.015
+quality_control_5,PELT,"penalty=2, jump=1, min_size=1",325,7.861
+rail_lines,MicroWatch(idx=0),"{""max_dist_size"":87.0,""new_dist_buffer_size"":11.0,""batch_size"":6.0,""threshold_ratio"":2.310421385}",,0.008
+rail_lines,MicroWatch(idx=1),"{""max_dist_size"":34.0,""batch_size"":5.0,""new_dist_buffer_size"":5.0,""threshold_ratio"":3.714126374}",5;25,0.008
+rail_lines,MicroWatch(idx=2),"{""batch_size"":5.0,""threshold_ratio"":2.172725087,""max_dist_size"":95.0,""new_dist_buffer_size"":5.0}",5;25,0.007
+rail_lines,MicroWatch(idx=3),"{""max_dist_size"":19.0,""new_dist_buffer_size"":5.0,""batch_size"":5.0,""threshold_ratio"":0.793160498}",5;25,0.007
+rail_lines,MicroWatch(idx=4),"{""threshold_ratio"":0.515232182,""new_dist_buffer_size"":8.0,""max_dist_size"":37.0,""batch_size"":3.0}",9;24,0.008
+rail_lines,MicroWatch(idx=5),"{""batch_size"":5.0,""threshold_ratio"":0.957240129,""max_dist_size"":72.0,""new_dist_buffer_size"":5.0}",25,0.009
+rail_lines,MicroWatch(idx=6),"{""threshold_ratio"":1.21161539,""new_dist_buffer_size"":4.0,""batch_size"":5.0,""max_dist_size"":37.0}",5;25,0.008
+rail_lines,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,0.055
+rail_lines,CUSUM,"twarmup=278, plimit=0.6070900742029276",,0.001
+rail_lines,PELT,"penalty=0.0000000001, jump=5, min_size=6",6;12;18;24;30;37,0.042
+ratner_stock,MicroWatch(idx=0),"{""batch_size"":6.0,""threshold_ratio"":0.977566261,""new_dist_buffer_size"":6.0,""max_dist_size"":70.0}",,0.026
+ratner_stock,MicroWatch(idx=1),"{""new_dist_buffer_size"":24.0,""max_dist_size"":45.0,""threshold_ratio"":3.091763487,""batch_size"":4.0}",276,0.030
+ratner_stock,MicroWatch(idx=2),"{""threshold_ratio"":2.300857264,""max_dist_size"":69.0,""new_dist_buffer_size"":15.0,""batch_size"":6.0}",270,0.028
+ratner_stock,MicroWatch(idx=3),"{""threshold_ratio"":3.420572722,""max_dist_size"":15.0,""batch_size"":5.0,""new_dist_buffer_size"":12.0}",210;270;330;405;455,0.022
+ratner_stock,MicroWatch(idx=4),"{""threshold_ratio"":2.080022544,""new_dist_buffer_size"":39.0,""batch_size"":6.0,""max_dist_size"":30.0}",210;270,0.027
+ratner_stock,MicroWatch(idx=5),"{""max_dist_size"":79.0,""new_dist_buffer_size"":37.0,""threshold_ratio"":1.579000706,""batch_size"":3.0}",162,0.063
+ratner_stock,MicroWatch(idx=6),"{""batch_size"":5.0,""threshold_ratio"":1.305230664,""max_dist_size"":89.0,""new_dist_buffer_size"":11.0}",15;30;80;160;205;245;260;275;290;305;330;355;405;455;560;580;595,0.066
+ratner_stock,BOCPD,"alpha=0.01, beta=0.1, kappa=0.1, mu=10",200;267,12.286
+ratner_stock,CUSUM,"twarmup=299, plimit=0.876822018756594",40;81;146;202;250;286;335;376;410;453;498;535;575,0.007
+ratner_stock,PELT,"penalty=6, jump=4, min_size=1",208;273;600,26.759
+robocalls,MicroWatch(idx=0),"{""max_dist_size"":83.0,""batch_size"":5.0,""threshold_ratio"":2.295247891,""new_dist_buffer_size"":39.0}",,0.008
+robocalls,MicroWatch(idx=1),"{""batch_size"":3.0,""max_dist_size"":53.0,""threshold_ratio"":3.551455921,""new_dist_buffer_size"":3.0}",3;9;36,0.011
+robocalls,MicroWatch(idx=2),"{""new_dist_buffer_size"":3.0,""threshold_ratio"":1.06948619,""batch_size"":6.0,""max_dist_size"":79.0}",6;36,0.008
+robocalls,MicroWatch(idx=3),"{""max_dist_size"":18.0,""new_dist_buffer_size"":8.0,""threshold_ratio"":2.901260681,""batch_size"":4.0}",8;36,0.005
+robocalls,MicroWatch(idx=4),"{""max_dist_size"":22.0,""batch_size"":3.0,""new_dist_buffer_size"":6.0,""threshold_ratio"":2.398975871}",6;39,0.009
+robocalls,MicroWatch(idx=5),"{""max_dist_size"":53.0,""threshold_ratio"":2.619966533,""batch_size"":3.0,""new_dist_buffer_size"":9.0}",9;36,0.009
+robocalls,MicroWatch(idx=6),"{""batch_size"":5.0,""max_dist_size"":23.0,""new_dist_buffer_size"":39.0,""threshold_ratio"":0.227726614}",40,0.004
+robocalls,BOCPD,"alpha=0.001, beta=0.001, kappa=0.5, mu=0",,0.092
+robocalls,CUSUM,"twarmup=238, plimit=0.34212335905445085",38,0.002
+robocalls,PELT,"penalty=1, jump=1, min_size=8",8;32;40;52,0.082
+run_log,MicroWatch(idx=0),"{""threshold_ratio"":3.580857085,""max_dist_size"":19.0,""new_dist_buffer_size"":50.0,""batch_size"":4.0}",,0.012
+run_log,MicroWatch(idx=1),"{""batch_size"":6.0,""new_dist_buffer_size"":13.0,""threshold_ratio"":3.194567721,""max_dist_size"":36.0}",60;96;114;174;204;240;258;318;336,0.033
+run_log,MicroWatch(idx=2),"{""batch_size"":4.0,""threshold_ratio"":0.822113408,""max_dist_size"":24.0,""new_dist_buffer_size"":13.0}",16;32;48;64;80;96;112;128;144;160;176;192;208;224;240;256;272;288;304;320;336;352;368,0.023
+run_log,MicroWatch(idx=3),"{""new_dist_buffer_size"":32.0,""batch_size"":4.0,""threshold_ratio"":1.35199548,""max_dist_size"":48.0}",88;140;208;268;320,0.036
+run_log,MicroWatch(idx=4),"{""threshold_ratio"":0.748086887,""max_dist_size"":46.0,""batch_size"":3.0,""new_dist_buffer_size"":35.0}",63;99;135;171;207;243;279;315;366,0.043
+run_log,MicroWatch(idx=5),"{""batch_size"":3.0,""max_dist_size"":49.0,""threshold_ratio"":1.272772745,""new_dist_buffer_size"":29.0}",30;63;93;123;180;210;264;318,0.062
+run_log,MicroWatch(idx=6),"{""threshold_ratio"":1.105168395,""batch_size"":4.0,""new_dist_buffer_size"":15.0,""max_dist_size"":47.0}",16;32;48;64;80;96;112;128;144;160;176;192;208;224;240;256;272;288;304;320;336;352;368,0.021
+run_log,PELT,"penalty=1, jump=9, min_size=1",9;60;70;79;96;105;114;123;167;177;204;240;258;276;307;317;376,12.500
+scanline_126007,MicroWatch(idx=0),"{""new_dist_buffer_size"":46.0,""threshold_ratio"":0.977110113,""batch_size"":3.0,""max_dist_size"":32.0}",,0.022
+scanline_126007,MicroWatch(idx=1),"{""max_dist_size"":55.0,""new_dist_buffer_size"":47.0,""batch_size"":5.0,""threshold_ratio"":1.557976055}",180;255,0.028
+scanline_126007,MicroWatch(idx=2),"{""batch_size"":6.0,""threshold_ratio"":3.57350436,""max_dist_size"":54.0,""new_dist_buffer_size"":10.0}",,0.022
+scanline_126007,MicroWatch(idx=3),"{""max_dist_size"":48.0,""new_dist_buffer_size"":10.0,""threshold_ratio"":2.818609088,""batch_size"":4.0}",,0.021
+scanline_126007,MicroWatch(idx=4),"{""max_dist_size"":78.0,""batch_size"":6.0,""threshold_ratio"":2.028758647,""new_dist_buffer_size"":11.0}",108;120;162;174;252;264;288;306;318,0.085
+scanline_126007,MicroWatch(idx=5),"{""max_dist_size"":74.0,""batch_size"":4.0,""new_dist_buffer_size"":11.0,""threshold_ratio"":3.082583756}",292,0.048
+scanline_126007,MicroWatch(idx=6),"{""threshold_ratio"":1.255096468,""max_dist_size"":13.0,""batch_size"":6.0,""new_dist_buffer_size"":12.0}",42;54;78;102;126;138;150;162;174;252;264;288;306;318;330;342;354;366;378;390,0.029
+scanline_126007,BOCPD,"alpha=10, beta=10, kappa=0.5, mu=100",247,7.636
+scanline_126007,CUSUM,"twarmup=279, plimit=0.8565453717188082",48;89;143;201;257;295;336;377;417;470,0.007
+scanline_126007,PELT,"penalty=6, jump=1, min_size=1",163;251;265;280;292;307;376;403;481,19.062
+scanline_42049,MicroWatch(idx=0),"{""max_dist_size"":77.0,""batch_size"":3.0,""threshold_ratio"":1.057818306,""new_dist_buffer_size"":49.0}",,0.035
+scanline_42049,MicroWatch(idx=1),"{""max_dist_size"":44.0,""batch_size"":3.0,""new_dist_buffer_size"":15.0,""threshold_ratio"":2.474819606}",60;78;168;183;276;348;363;468,0.061
+scanline_42049,MicroWatch(idx=2),"{""new_dist_buffer_size"":37.0,""max_dist_size"":82.0,""threshold_ratio"":0.711666818,""batch_size"":6.0}",42;186;228;270;354;468,0.041
+scanline_42049,MicroWatch(idx=3),"{""batch_size"":5.0,""new_dist_buffer_size"":16.0,""threshold_ratio"":1.646664095,""max_dist_size"":89.0}",55,0.033
+scanline_42049,MicroWatch(idx=4),"{""threshold_ratio"":0.343397746,""max_dist_size"":81.0,""new_dist_buffer_size"":22.0,""batch_size"":3.0}",24;51;75;183;273;354;468,0.137
+scanline_42049,MicroWatch(idx=5),"{""threshold_ratio"":0.546164796,""batch_size"":4.0,""max_dist_size"":79.0,""new_dist_buffer_size"":49.0}",76;128;180;276;364,0.060
+scanline_42049,MicroWatch(idx=6),"{""batch_size"":4.0,""threshold_ratio"":0.965736645,""new_dist_buffer_size"":49.0,""max_dist_size"":91.0}",52;192;272;356,0.050
+scanline_42049,BOCPD,"alpha=0.01, beta=0.001, kappa=100, mu=200",49;50;72;73;178;270;271,7.574
+scanline_42049,CUSUM,"twarmup=288, plimit=0.15471524599019587",38;75;175;251;291;330;394;436;468,0.008
+scanline_42049,PELT,"penalty=8, jump=1, min_size=1",55;77;184;275;349;363;466;481,17.146
+seatbelts,MicroWatch(idx=0),"{""batch_size"":5.0,""max_dist_size"":38.0,""new_dist_buffer_size"":48.0,""threshold_ratio"":0.999174189}",,0.010
+seatbelts,MicroWatch(idx=1),"{""threshold_ratio"":0.878249372,""new_dist_buffer_size"":43.0,""max_dist_size"":56.0,""batch_size"":3.0}",60;171,0.021
+seatbelts,MicroWatch(idx=2),"{""new_dist_buffer_size"":16.0,""batch_size"":5.0,""max_dist_size"":76.0,""threshold_ratio"":1.981385895}",,0.017
+seatbelts,MicroWatch(idx=3),"{""new_dist_buffer_size"":14.0,""max_dist_size"":14.0,""threshold_ratio"":1.874862016,""batch_size"":5.0}",45;60;170,0.009
+seatbelts,MicroWatch(idx=4),"{""new_dist_buffer_size"":49.0,""batch_size"":6.0,""max_dist_size"":55.0,""threshold_ratio"":0.712187895}",60;168,0.016
+seatbelts,MicroWatch(idx=5),"{""batch_size"":4.0,""new_dist_buffer_size"":50.0,""max_dist_size"":22.0,""threshold_ratio"":0.540306661}",56;116,0.013
+seatbelts,MicroWatch(idx=6),"{""batch_size"":4.0,""max_dist_size"":83.0,""threshold_ratio"":0.983631215,""new_dist_buffer_size"":45.0}",168,0.015
+seatbelts,BOCPD,"alpha=0.1, beta=0.001, kappa=0.1, mu=200",164,1.207
+seatbelts,CUSUM,"twarmup=196, plimit=0.5051431329426558",52;136;176,0.004
+seatbelts,PELT,"penalty=5, jump=5, min_size=1",72;169;192,2.827
+shanghai_license,MicroWatch(idx=0),"{""max_dist_size"":61.0,""batch_size"":3.0,""threshold_ratio"":1.043895279,""new_dist_buffer_size"":45.0}",,0.023
+shanghai_license,MicroWatch(idx=1),"{""threshold_ratio"":3.617434115,""new_dist_buffer_size"":33.0,""batch_size"":5.0,""max_dist_size"":93.0}",145,0.065
+shanghai_license,MicroWatch(idx=2),"{""threshold_ratio"":2.746570231,""max_dist_size"":73.0,""new_dist_buffer_size"":12.0,""batch_size"":5.0}",55;160,0.044
+shanghai_license,MicroWatch(idx=3),"{""max_dist_size"":71.0,""threshold_ratio"":3.886121913,""batch_size"":6.0,""new_dist_buffer_size"":46.0}",168,0.020
+shanghai_license,MicroWatch(idx=4),"{""batch_size"":5.0,""new_dist_buffer_size"":36.0,""threshold_ratio"":1.886476529,""max_dist_size"":35.0}",55;145,0.022
+shanghai_license,MicroWatch(idx=5),"{""threshold_ratio"":2.32966091,""new_dist_buffer_size"":26.0,""max_dist_size"":93.0,""batch_size"":5.0}",55;145,0.060
+shanghai_license,MicroWatch(idx=6),"{""threshold_ratio"":1.270643508,""batch_size"":5.0,""max_dist_size"":32.0,""new_dist_buffer_size"":29.0}",55;145,0.019
+shanghai_license,BOCPD,"alpha=0.5, beta=0.001, kappa=100, mu=0",52;53;140;141,1.469
+shanghai_license,CUSUM,"twarmup=200, plimit=0.28998842262540725",58;136;173,0.003
+shanghai_license,PELT,"penalty=10, jump=5, min_size=1",74;146;205,3.205
+uk_coal_employ,MicroWatch(idx=0),"{""batch_size"":5.0,""threshold_ratio"":0.164684234,""max_dist_size"":30.0,""new_dist_buffer_size"":21.0}",,0.007
+uk_coal_employ,MicroWatch(idx=1),"{""max_dist_size"":36.0,""threshold_ratio"":1.393403099,""batch_size"":5.0,""new_dist_buffer_size"":4.0}",5,0.007
+uk_coal_employ,MicroWatch(idx=2),"{""threshold_ratio"":0.769394577,""max_dist_size"":77.0,""batch_size"":5.0,""new_dist_buffer_size"":9.0}",,0.012
+uk_coal_employ,MicroWatch(idx=3),"{""batch_size"":3.0,""threshold_ratio"":1.913102637,""new_dist_buffer_size"":12.0,""max_dist_size"":54.0}",,0.012
+uk_coal_employ,MicroWatch(idx=4),"{""threshold_ratio"":2.582841263,""new_dist_buffer_size"":16.0,""max_dist_size"":52.0,""batch_size"":4.0}",,0.013
+uk_coal_employ,MicroWatch(idx=5),"{""max_dist_size"":40.0,""new_dist_buffer_size"":14.0,""batch_size"":6.0,""threshold_ratio"":0.872643984}",,0.007
+uk_coal_employ,MicroWatch(idx=6),"{""batch_size"":4.0,""threshold_ratio"":1.796328147,""new_dist_buffer_size"":47.0,""max_dist_size"":28.0}",,0.004
+uk_coal_employ,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,0.604
+uk_coal_employ,CUSUM,"twarmup=66, plimit=0.3557651427886687",,0.003
+uk_coal_employ,PELT,"penalty=0.03, jump=5, min_size=6",12;18;24;30;36;42;48;54;60;66;72;78;84;90;96;105,0.255
+unemployment_nl,MicroWatch(idx=0),"{""new_dist_buffer_size"":24.0,""max_dist_size"":22.0,""threshold_ratio"":0.99366811,""batch_size"":3.0}",,0.010
+unemployment_nl,MicroWatch(idx=1),"{""max_dist_size"":87.0,""threshold_ratio"":2.982100887,""new_dist_buffer_size"":7.0,""batch_size"":3.0}",132;141;183,0.049
+unemployment_nl,MicroWatch(idx=2),"{""new_dist_buffer_size"":27.0,""threshold_ratio"":1.9585856,""batch_size"":5.0,""max_dist_size"":13.0}",50;130,0.010
+unemployment_nl,MicroWatch(idx=3),"{""batch_size"":3.0,""threshold_ratio"":2.140085825,""max_dist_size"":27.0,""new_dist_buffer_size"":9.0}",132;141,0.019
+unemployment_nl,MicroWatch(idx=4),"{""batch_size"":3.0,""new_dist_buffer_size"":9.0,""threshold_ratio"":3.914403415,""max_dist_size"":39.0}",132;141;183;198,0.035
+unemployment_nl,MicroWatch(idx=5),"{""batch_size"":6.0,""threshold_ratio"":0.101505794,""new_dist_buffer_size"":50.0,""max_dist_size"":81.0}",54;120;180,0.019
+unemployment_nl,MicroWatch(idx=6),"{""threshold_ratio"":1.296811807,""batch_size"":5.0,""max_dist_size"":72.0,""new_dist_buffer_size"":10.0}",10;20;40;70;85;100;115;130;140;180,0.027
+unemployment_nl,BOCPD,"alpha=0.01, beta=0.5, kappa=2, mu=5",116;126;137;170;176;177,1.469
+unemployment_nl,CUSUM,"twarmup=165, plimit=0.5989745179462147",40;77;128,0.004
+unemployment_nl,PELT,"penalty=10, jump=8, min_size=1",143;175;214,3.763
+usd_isk,MicroWatch(idx=0),"{""batch_size"":3.0,""threshold_ratio"":0.993889287,""max_dist_size"":60.0,""new_dist_buffer_size"":30.0}",30;117;246,0.034
+usd_isk,MicroWatch(idx=1),"{""new_dist_buffer_size"":25.0,""max_dist_size"":19.0,""threshold_ratio"":2.465336954,""batch_size"":3.0}",33;117,0.016
+usd_isk,MicroWatch(idx=2),"{""threshold_ratio"":1.288671441,""max_dist_size"":46.0,""new_dist_buffer_size"":33.0,""batch_size"":3.0}",69;114,0.021
+usd_isk,MicroWatch(idx=3),"{""new_dist_buffer_size"":27.0,""threshold_ratio"":2.219617646,""max_dist_size"":25.0,""batch_size"":3.0}",33;117,0.011
+usd_isk,MicroWatch(idx=4),"{""max_dist_size"":66.0,""threshold_ratio"":1.343401745,""new_dist_buffer_size"":32.0,""batch_size"":3.0}",33;117,0.043
+usd_isk,MicroWatch(idx=5),"{""batch_size"":3.0,""threshold_ratio"":2.11266592,""max_dist_size"":50.0,""new_dist_buffer_size"":32.0}",72,0.024
+usd_isk,MicroWatch(idx=6),"{""new_dist_buffer_size"":25.0,""batch_size"":3.0,""max_dist_size"":13.0,""threshold_ratio"":2.10463233}",33;117,0.010
+usd_isk,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,2.455
+usd_isk,CUSUM,"twarmup=167, plimit=0.13099419591541206",36;74;117;225,0.005
+usd_isk,PELT,"penalty=20, jump=5, min_size=1",117;247,4.546
+us_population,MicroWatch(idx=0),"{""new_dist_buffer_size"":43.0,""max_dist_size"":93.0,""threshold_ratio"":0.161443766,""batch_size"":4.0}",,0.041
+us_population,MicroWatch(idx=1),"{""batch_size"":5.0,""threshold_ratio"":3.994571629,""max_dist_size"":91.0,""new_dist_buffer_size"":43.0}",245;465;710,0.075
+us_population,MicroWatch(idx=2),"{""threshold_ratio"":3.99274097,""max_dist_size"":99.0,""batch_size"":4.0,""new_dist_buffer_size"":44.0}",276;500;776,0.079
+us_population,MicroWatch(idx=3),"{""threshold_ratio"":3.830121693,""batch_size"":5.0,""new_dist_buffer_size"":10.0,""max_dist_size"":92.0}",255;480;740,0.083
+us_population,MicroWatch(idx=4),"{""batch_size"":3.0,""new_dist_buffer_size"":17.0,""max_dist_size"":100.0,""threshold_ratio"":3.997566626}",156;312;465;627;798,0.272
+us_population,MicroWatch(idx=5),"{""new_dist_buffer_size"":31.0,""max_dist_size"":91.0,""batch_size"":5.0,""threshold_ratio"":3.964920021}",235;450;680,0.093
+us_population,MicroWatch(idx=6),"{""batch_size"":6.0,""new_dist_buffer_size"":17.0,""threshold_ratio"":1.164734686,""max_dist_size"":58.0}",18;36;54;72;90;108;126;144;162;180;198;216;234;252;270;288;306;324;342;360;378;396;414;432;450;468;486;504;522;540;558;576;594;612;630;648;666;684;702;720;738;756;774;792;810,0.054
+us_population,BOCPD,"alpha=0.001, beta=0.001, kappa=0.1, mu=0",,21.628
+us_population,CUSUM,"twarmup=81, plimit=0.7525625716673816",37;75;113;151;189;226;264;302;339;377;415;453;491;529;567;605;643;681;719;757;795,0.007
+us_population,PELT,"penalty=300, jump=1, min_size=1",816,50.557
+well_log,MicroWatch(idx=0),"{""threshold_ratio"":0.999498921,""max_dist_size"":14.0,""batch_size"":4.0,""new_dist_buffer_size"":46.0}",,0.026
+well_log,MicroWatch(idx=1),"{""max_dist_size"":58.0,""new_dist_buffer_size"":3.0,""threshold_ratio"":1.664018272,""batch_size"":3.0}",3;174;180;255;282;288;312;342;402;414;423;432;462;657,0.101
+well_log,MicroWatch(idx=2),"{""max_dist_size"":21.0,""batch_size"":3.0,""threshold_ratio"":0.268245963,""new_dist_buffer_size"":25.0}",147;174;201;237;267;294;321;348;375;402;429;462;522;552;582;609;636;666,0.034
+well_log,MicroWatch(idx=3),"{""new_dist_buffer_size"":5.0,""batch_size"":6.0,""max_dist_size"":28.0,""threshold_ratio"":1.953409166}",402;462,0.026
+well_log,MicroWatch(idx=4),"{""batch_size"":3.0,""max_dist_size"":93.0,""threshold_ratio"":0.423092414,""new_dist_buffer_size"":15.0}",180;195;237;282;309;342;384;399;414;429;462;657,0.139
+well_log,MicroWatch(idx=5),"{""batch_size"":3.0,""max_dist_size"":12.0,""new_dist_buffer_size"":44.0,""threshold_ratio"":0.3797616}",180;255;312;402,0.032
+well_log,MicroWatch(idx=6),"{""threshold_ratio"":1.015525056,""batch_size"":5.0,""max_dist_size"":54.0,""new_dist_buffer_size"":3.0}",180;195;460;655,0.037
+well_log,BOCPD,"alpha=0.5, beta=0.001, kappa=0.1, mu=0",174,15.468
+well_log,CUSUM,"twarmup=172, plimit=0.7543420749297682",193;452,0.031
+well_log,PELT,"penalty=4, jump=1, min_size=9",171;180;252;279;315;342;396;423;432;459;675,12.421
